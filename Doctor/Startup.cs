@@ -1,4 +1,7 @@
 using Doctor.Data;
+using Doctor.IService;
+using Doctor.Models;
+using Doctor.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -41,6 +44,7 @@ namespace Doctor
                 configuration.RootPath = "ClientApp/build";
             });
             services.AddDbContext<AppDbContext>(p => p.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped<IGenericService<Employee>, EmployeeService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
