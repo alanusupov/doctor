@@ -12,8 +12,6 @@ namespace Doctor.Service
     public class EmployeeService : IGenericService<Employee>
     {
         readonly AppDbContext _db;
-
-        List<Employee> _employees = new List<Employee>();
         public EmployeeService(AppDbContext dbContext)
         {
             _db = dbContext;
@@ -27,6 +25,7 @@ namespace Doctor.Service
                             EmployeeId = i,
                             Name = i + "FIO",
                             Email = i + "qwe@gmail.com",
+                            ImgUrl = "https://image.freepik.com/free-vector/doctor-character-background_1270-84.jpg",
                             Specialty = i + "Akusher-ginekolog",
                             AboutMe = i + "About me",
                             Experience = i,
@@ -47,6 +46,7 @@ namespace Doctor.Service
                 EmployeeId = _db.Employees.Any() ? _db.Employees.Max(p => p.EmployeeId) + 1 : 1,
                 Name = empl.Name,
                 Email = empl.Email,
+                ImgUrl = empl.ImgUrl,
                 Specialty = empl.Specialty,
                 AboutMe = empl.AboutMe,
                 Experience = empl.Experience,
@@ -90,6 +90,7 @@ namespace Doctor.Service
             {
                 employee.Name = empl.Name;
                 employee.Email = empl.Email;
+                employee.ImgUrl = empl.ImgUrl;
                 employee.Specialty = empl.Specialty;
                 employee.AboutMe = empl.AboutMe;
                 employee.Experience = empl.Experience;

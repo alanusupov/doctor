@@ -25,7 +25,6 @@ namespace Doctor.Controllers
         {
             return await _genericService.GetAllAsync();
         }
-
         
         [HttpGet("{id}")]
         public async Task<T> Get(int id)

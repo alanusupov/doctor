@@ -10,6 +10,7 @@ namespace Doctor.Models
         public int EmployeeId { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
+        public string ImgUrl { get; set; }
         public string Specialty { get; set; }
         public string AboutMe { get; set; }
         public int Experience { get; set; }
