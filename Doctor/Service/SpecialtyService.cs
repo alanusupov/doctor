@@ -15,15 +15,15 @@ namespace Doctor.Service
         public SpecialtyService(AppDbContext dbContext)
         {
             _db = dbContext;
+             string [] spec = { "Педиатр", "Кардиолог" , "Инфекционисты", "Дерматовенеролог", "Гинекология", "Уролог", "Семейные врачи", "Терапевт", "ЛОР врач" };
             if (!_db.Specialties.Any())
             {
-                for (int i = 1; i < 10; i++)
+                foreach(string item in spec)
                 {
                     _db.Specialties.Add(
                         new Specialty
                         {
-                            SpecialtyId = i,
-                            Name = "Specialty" + i
+                            Name = item
                         });
                 }
                 _db.SaveChanges();
@@ -34,7 +34,6 @@ namespace Doctor.Service
         {
             var _specialty = new Specialty
             {
-                SpecialtyId = _db.Specialties.Any() ? _db.Specialties.Max(p => p.SpecialtyId) + 1 : 1,
                 Name = specialty.Name
             };
             await _db.Specialties.AddAsync(_specialty);

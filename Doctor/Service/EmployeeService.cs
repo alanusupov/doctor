@@ -18,16 +18,18 @@ namespace Doctor.Service
             _db = dbContext;
             if (!_db.Employees.Any())
             {
-                for (int i = 1; i < 4; i++)
+                for (int i = 0; i < 4; i++)
                 {
                     _db.Employees.Add(
                         new Employee
                         {
-                            EmployeeId = i,
                             Name = i + "FIO",
                             Email = i + "qwe@gmail.com",
                             ImgUrl = "https://image.freepik.com/free-vector/doctor-character-background_1270-84.jpg",
-                            Specialties =new List<string> { "Specialty1", "Specialty2" },
+                            EmployeeSpecialties = new List<EmployeeSpecialties> { 
+                                new EmployeeSpecialties { Name = _db.Specialties.ToList()[i].Name },
+                                new EmployeeSpecialties { Name = _db.Specialties.ToList()[i+1].Name }
+                            },
                             AboutMe = i + "About me",
                             Experience = i,
                             WorkExperience = new List<string> { "1WorkExperience", "2WorkExperience", "3WorkExperience" },
@@ -44,11 +46,10 @@ namespace Doctor.Service
         {
             var _employee = new Employee
             {
-                EmployeeId = _db.Employees.Any() ? _db.Employees.Max(p => p.EmployeeId) + 1 : 1,
                 Name = employee.Name,
                 Email = employee.Email,
                 ImgUrl = employee.ImgUrl,
-                Specialties = employee.Specialties,
+                EmployeeSpecialties = employee.EmployeeSpecialties,
                 AboutMe = employee.AboutMe,
                 Experience = employee.Experience,
                 WorkExperience = employee.WorkExperience,
@@ -63,9 +64,9 @@ namespace Doctor.Service
 
         public async Task<Employee> DeleteAsync(int id)
         {
-            var _employee = await _db.Employees.FindAsync(id);
+            var _employee = await _db.Employees.Include(x => x.EmployeeSpecialties).FirstOrDefaultAsync(x => x.EmployeeId == id);
             if (_employee != null)
-            {
+            {   
                 _db.Employees.Remove(_employee);
                 await _db.SaveChangesAsync();
             }
@@ -74,7 +75,7 @@ namespace Doctor.Service
 
         public async Task<IEnumerable<Employee>> GetAllAsync()
         {
-            return await _db.Employees.ToListAsync();
+            return await _db.Employees.Include(x => x.EmployeeSpecialties).ToListAsync();
         }
 
         public async Task<Employee> GetByIdAsync(int id)
@@ -92,7 +93,7 @@ namespace Doctor.Service
                 _employee.Name = employee.Name;
                 _employee.Email = employee.Email;
                 _employee.ImgUrl = employee.ImgUrl;
-                _employee.Specialties = employee.Specialties;
+                _employee.EmployeeSpecialties = employee.EmployeeSpecialties;
                 _employee.AboutMe = employee.AboutMe;
                 _employee.Experience = employee.Experience;
                 _employee.WorkExperience = employee.WorkExperience;
