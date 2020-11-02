@@ -44,6 +44,8 @@ namespace Doctor
                 configuration.RootPath = "ClientApp/build";
             });
             services.AddDbContext<AppDbContext>(p => p.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+            
+            services.AddScoped<IGenericService<Specialty>, SpecialtyService>();
             services.AddScoped<IGenericService<Employee>, EmployeeService>();
         }
 

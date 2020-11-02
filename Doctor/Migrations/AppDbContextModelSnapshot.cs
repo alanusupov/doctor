@@ -47,8 +47,8 @@ namespace Doctor.Migrations
                     b.Property<List<string>>("PerformedProcedures")
                         .HasColumnType("text[]");
 
-                    b.Property<string>("Specialty")
-                        .HasColumnType("text");
+                    b.Property<List<string>>("Specialties")
+                        .HasColumnType("text[]");
 
                     b.Property<List<string>>("TreatmentOfDiseases")
                         .HasColumnType("text[]");
@@ -59,6 +59,21 @@ namespace Doctor.Migrations
                     b.HasKey("EmployeeId");
 
                     b.ToTable("Employees");
+                });
+
+            modelBuilder.Entity("Doctor.Models.Specialty", b =>
+                {
+                    b.Property<int>("SpecialtyId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.HasKey("SpecialtyId");
+
+                    b.ToTable("Specialties");
                 });
 #pragma warning restore 612, 618
         }

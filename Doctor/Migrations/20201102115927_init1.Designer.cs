@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Doctor.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20201029193854_init2")]
-    partial class init2
+    [Migration("20201102115927_init1")]
+    partial class init1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -40,14 +40,17 @@ namespace Doctor.Migrations
                     b.Property<int>("Experience")
                         .HasColumnType("integer");
 
+                    b.Property<string>("ImgUrl")
+                        .HasColumnType("text");
+
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
                     b.Property<List<string>>("PerformedProcedures")
                         .HasColumnType("text[]");
 
-                    b.Property<string>("Specialty")
-                        .HasColumnType("text");
+                    b.Property<List<string>>("Specialties")
+                        .HasColumnType("text[]");
 
                     b.Property<List<string>>("TreatmentOfDiseases")
                         .HasColumnType("text[]");
@@ -58,6 +61,21 @@ namespace Doctor.Migrations
                     b.HasKey("EmployeeId");
 
                     b.ToTable("Employees");
+                });
+
+            modelBuilder.Entity("Doctor.Models.Specialty", b =>
+                {
+                    b.Property<int>("SpecialtyId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.HasKey("SpecialtyId");
+
+                    b.ToTable("Specialties");
                 });
 #pragma warning restore 612, 618
         }

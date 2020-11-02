@@ -16,7 +16,8 @@ namespace Doctor.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
-                    Specialty = table.Column<string>(nullable: true),
+                    ImgUrl = table.Column<string>(nullable: true),
+                    Specialties = table.Column<List<string>>(nullable: true),
                     AboutMe = table.Column<string>(nullable: true),
                     Experience = table.Column<int>(nullable: false),
                     WorkExperience = table.Column<List<string>>(nullable: true),
@@ -28,12 +29,28 @@ namespace Doctor.Migrations
                 {
                     table.PrimaryKey("PK_Employees", x => x.EmployeeId);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Specialties",
+                columns: table => new
+                {
+                    SpecialtyId = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Specialties", x => x.SpecialtyId);
+                });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "Employees");
+
+            migrationBuilder.DropTable(
+                name: "Specialties");
         }
     }
 }
