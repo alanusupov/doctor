@@ -4,15 +4,17 @@ using System.Collections.Generic;
 using Doctor.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Doctor.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201103192758_init2")]
+    partial class init2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -107,9 +109,6 @@ namespace Doctor.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<int?>("ClientId")
-                        .HasColumnType("integer");
-
                     b.Property<DateTime>("DateOfReceipt")
                         .HasColumnType("timestamp without time zone");
 
@@ -126,8 +125,6 @@ namespace Doctor.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("ReceptionId");
-
-                    b.HasIndex("ClientId");
 
                     b.HasIndex("EmployeeId");
 
@@ -160,10 +157,6 @@ namespace Doctor.Migrations
 
             modelBuilder.Entity("Doctor.Models.Reception", b =>
                 {
-                    b.HasOne("Doctor.Models.Client", "Client")
-                        .WithMany()
-                        .HasForeignKey("ClientId");
-
                     b.HasOne("Doctor.Models.Employee", "Employee")
                         .WithMany()
                         .HasForeignKey("EmployeeId");
