@@ -26,9 +26,9 @@ namespace Doctor.Service
                 _db.Receptions.Add(
                     new Reception
                     {
-                         Specialty = _db.Specialties.First(),
+                         SpecialtyId = _db.Specialties.First().SpecialtyId,
                          DateOfReceipt = DateTime.UtcNow,
-                         Employee = _db.Employees.First(),
+                         EmployeeId = _db.Employees.First().EmployeeId,
                          Client = new Client { Name = "FIO", Phone = "0987654321", Email = "qwe@gmail.com" },
                          Status = Status.Approved,
                          Registered = DateTime.UtcNow
@@ -36,9 +36,9 @@ namespace Doctor.Service
                 _db.Receptions.Add(
                     new Reception
                     {
-                         Specialty = _db.Specialties.First(),
+                         SpecialtyId = _db.Specialties.First().SpecialtyId,
                          DateOfReceipt = DateTime.UtcNow,
-                         Employee = _db.Employees.First(),
+                         EmployeeId = _db.Employees.First().EmployeeId,
                          Client = new Client { Name = "FIO", Phone = "0987654321", Email = "qwe@gmail.com" },
                          Status = Status.Approved,
                          Registered = DateTime.UtcNow
@@ -51,9 +51,9 @@ namespace Doctor.Service
         {
             var _reception = new Reception
             {
-                Specialty = reception.Specialty,
+                SpecialtyId = reception.SpecialtyId,
                 DateOfReceipt = reception.DateOfReceipt,
-                Employee = reception.Employee,
+                EmployeeId = reception.EmployeeId,
                 Client = reception.Client,
                 Status = reception.Status,
                 Registered = reception.Registered
@@ -65,7 +65,7 @@ namespace Doctor.Service
 
         public async Task<Reception> DeleteAsync(int id)
         {
-            var _reception = await _db.Receptions.Include(x => x.Client).FirstOrDefaultAsync(x => x.ReceptionId == id);
+            var _reception = await _db.Receptions.Include(x => x.Client.ClientId).FirstOrDefaultAsync(x => x.ReceptionId == id);
             if (_reception != null)
             {
                 _db.Receptions.Remove(_reception);
@@ -91,9 +91,9 @@ namespace Doctor.Service
 
             if (_reception != null)
             {
-                _reception.Specialty = reception.Specialty;
+                _reception.SpecialtyId = reception.SpecialtyId;
                 _reception.DateOfReceipt = reception.DateOfReceipt;
-                _reception.Employee = reception.Employee;
+                _reception.EmployeeId = reception.EmployeeId;
                 _reception.Client = reception.Client;
                 _reception.Status = reception.Status;
                 _reception.Registered = reception.Registered;
