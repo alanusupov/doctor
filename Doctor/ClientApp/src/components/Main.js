@@ -1,12 +1,24 @@
 import React from 'react';
-import Form from './Form';
-import Contact from './Contact';
+import How from './How';
+import Top from './Top';
+import About from './About';
+import Doctors from './Doctors';
+import Questions from './Questions';
+import Consult from './Consult';
+import PicDivider from './PicDivider';
 
 function Main() {
   return (
     <div>
-      <Form/>
-      <Contact/>
+      <Top/>
+      <How/>
+      <PicDivider/>
+      <About/>
+      <PicDivider/>
+      <Consult/>
+      <Doctors/>
+      <Questions/>
+      <PicDivider/>
     </div>
   )
 }

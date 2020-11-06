@@ -1,0 +1,61 @@
+.choose-category-btn{
+  background: white;
+  border: 1px solid #D2D2D2;
+  box-sizing: border-box;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 14px;
+  color: #40BAFF;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 10px;
+  margin-bottom: 8px;
+}
+.choose-category-btn::after {
+  content: '300com';
+  color: #1B9BE3;
+}
+.choose-category-btn:hover{
+  background: #40BAFF;
+  color: white;
+}
+.category{
+  padding: 18px;
+  padding-top: 10px;
+}
+.choose-top{  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.choose-text{
+  font-size: 11px;
+  color: #939495;
+}
+.choose-title{
+  color: #40BAFF;
+  font-size: 14px;
+}
+.modal-header .close {
+  padding: 1rem 1rem;
+  margin: -1rem -1rem -1rem 0 !important;
+  font-size: 16px;
+  padding-right: 29px !important;
+}
+.modal-header {
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  padding: 0;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+  border-radius: 4px 4px 0px 0px;
+  border-bottom: none;
+}
+.modal-title{
+  font-size: 14px;
+  color: #40BAFF;
+}
