@@ -33,7 +33,7 @@ namespace Doctor.Controllers
         }
 
         [HttpDelete]
-        public async Task<string> UpdateFile(string filePath)
+        public async Task<string> DeleteFile(string filePath)
         {
             var path = await _fileService.DeleteFile(filePath);
             return path;
