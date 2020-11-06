@@ -14,7 +14,7 @@ namespace Doctor.Controllers
     [ApiController]
     public class GenericController<T> : Controller where T : class
     {
-        private IGenericService<T> _genericService;
+        public IGenericService<T> _genericService;
         public GenericController(IGenericService<T> genericService)
         {
             _genericService = genericService;
@@ -38,8 +38,8 @@ namespace Doctor.Controllers
             return await _genericService.AddAsync(value);
         }
 
-        [HttpPut("{id}")]
-        public async Task<T> Put(long id,[FromBody] T value)
+        [HttpPut]
+        public async Task<T> Put([FromBody] T value)
         { 
             return await _genericService.UpdateAsync(value);
         }

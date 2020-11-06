@@ -111,5 +111,15 @@ namespace Doctor.Service
         }
         private bool ReceptionExists(long id) =>
          _db.Receptions.Any(e => e.ReceptionId == id);
+        public async Task<List<string>> GetDateOfReceptions(int id,DateTime date)
+        {
+            var reception = await _db.Receptions.Where(x => x.DateOfReceipt >= date && x.DateOfReceipt < date.AddDays(1) && x.EmployeeId == id).ToListAsync();
+            var result = new List<string>();
+            foreach(Reception item in reception)
+            {
+                result.Add(item.DateOfReceipt.ToString("hh"));
+            }
+            return result;
+        }
     }
 }
