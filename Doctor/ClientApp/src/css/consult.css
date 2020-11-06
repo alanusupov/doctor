@@ -1,0 +1,65 @@
+.consult{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 16px;
+  padding: 13px 0;
+}
+.consult .sub{
+  color: #939495;
+}
+.consult-list{
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+
+}
+.consult-pic{
+  margin: 16px;
+}
+.consult-item{
+  font-weight: bold;
+  font-size: 11px;
+  background: #F7F9FF;
+  box-shadow: 0px 5px 10px -3px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  color: #40BAFF;
+  margin-bottom: 10px;
+  padding: 10px 15px;
+  text-align: center;
+  
+}
+.cons-texts{
+  max-width: 475px;
+  display: flex;
+  flex-direction: column;
+}
+.linebreak1{
+  display: none;
+}
+@media screen and (min-width: 830px) {
+  .consult-pic{
+    display: none;
+  }
+  .consult{
+    flex-direction: row;
+    justify-content: center;
+  }
+  .linebreak1{
+    display: block;
+  }
+  .consult-item{
+    margin: 15px;
+    font-size: 14px;
+  }
+}
+@media screen and (min-width: 1110px){
+  .consult-item{
+    margin: 15px;
+    font-size: 22px;
+  }
+}

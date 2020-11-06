@@ -1,1 +1,1 @@
-export * from './contact/actions'
+export * from './doctors/actions'

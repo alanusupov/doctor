@@ -1,21 +1,22 @@
 import React from 'react';
 import {BrowserRouter} from 'react-router-dom'
 import './App.css';
-import Header from './components/Header';
 import 'bootstrap/dist/css/bootstrap.min.css'
-
 import Routers from './components/Routers';
+import NavBar from './components/Header';
+import Contact from './components/Contact';
 
 
 function App() {
   return (
-    <div >
+    <div >  
      <BrowserRouter>
-        <Header/>
-        <div className="container pt-4">
+     <div className="wrapper">
+       <NavBar/>  
        <Routers/>
-
-        </div>
+       <Contact/>
+     </div>
+        
      </BrowserRouter>
     </div>
   );

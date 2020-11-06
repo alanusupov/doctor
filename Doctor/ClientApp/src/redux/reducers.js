@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux';
-import ContactReducer from './contact/reducers'
+import DoctorReducer from './doctors/reducers'
 
 export const rootReducer = combineReducers({
-  ContactReducer
+  DoctorReducer
 });

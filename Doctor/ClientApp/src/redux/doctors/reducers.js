@@ -1,22 +1,22 @@
-import {ADD_CONTACT, DELETE_CONTACT,GET_CONTACT, UPDATE_CONTACT} from './constants';
+import {ADD_DOCTOR, DELETE_DOCTOR,GET_DOCTOR, UPDATE_DOCTOR} from './constants';
 
 const initialState = {
-  contacts: []
+  doctors: []
 };
 
-function ContactReducer(state = initialState, action){
+function DoctorReducer(state = initialState, action){
   console.log(state, action);
   switch(action.type){
-    case ADD_CONTACT:
+    case ADD_DOCTOR:
       return {...state, contacts: [...state.contacts,action.payload]}
-    case GET_CONTACT:
+    case GET_DOCTOR:
        return {...state, contacts: action.payload}
-    case DELETE_CONTACT:
+    case DELETE_DOCTOR:
       return {...state, contacts: state.contacts.filter(contact => action.payload !== contact.id)}
-    case UPDATE_CONTACT:
+    case UPDATE_DOCTOR:
       return {...state, contacts: state.contacts.map(item => item.id === action.payload.id ? action.payload : item)}
     default: 
     return state
   }
 }
-export default ContactReducer;
+export default DoctorReducer;
