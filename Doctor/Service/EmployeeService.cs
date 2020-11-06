@@ -23,19 +23,39 @@ namespace Doctor.Service
                     _db.Employees.Add(
                         new Employee
                         {
-                            Name = i + "FIO",
+                            Name = "Анатолий Анатольев Анатольевич "+i,
                             Email = i + "qwe@gmail.com",
-                            ImgUrl = "https://image.freepik.com/free-vector/doctor-character-background_1270-84.jpg",
+                            ImgUrl = "/img/doc.jpg",
                             EmployeeSpecialties = new List<EmployeeSpecialties> { 
                                 new EmployeeSpecialties { Name = _db.Specialties.ToList()[i].Name },
                                 new EmployeeSpecialties { Name = _db.Specialties.ToList()[i+1].Name }
                             },
-                            AboutMe = i + "About me",
+                            AboutMe = i + "Полное описание врача. Полное описание врача. Полное описание врача. Полное описание врача. Полное описание врача. Полное описание врача. Полное описание врача. Полное описание врача. Полное описание врача. Полное описание врача. Полное описание врача. Полное описание врача. Полное описание врача. Полное описание врача. Полное описание врача. Полное описание врача. Полное описание врача. ",
                             Experience = i,
-                            WorkExperience = new List<string> { "1WorkExperience", "2WorkExperience", "3WorkExperience" },
-                            Education = new List<string> { "1Education", "2Education", "3Education" },
-                            PerformedProcedures = new List<string> { "1PerformedProcedures", "2PerformedProcedures", "3PerformedProcedures" },
-                            TreatmentOfDiseases = new List<string> { "1PerformedProcedures", "2PerformedProcedures", "3PerformedProcedures" }
+                            WorkExperience = new List<string> 
+                            { 
+                                "По пунктно описаны места и конференции, где побывал врач. А так же получение наград и т.д. ",
+                                "По пунктно описаны места и конференции, где побывал врач. А так же получение наград и т.д. ",
+                                "По пунктно описаны места и конференции, где побывал врач. А так же получение наград и т.д. "
+                            },
+                            Education = new List<string> 
+                            { 
+                                "По пунктно описаны медецинские ВУЗы, курсы, училища, который закончил врач.",
+                                "По пунктно описаны медецинские ВУЗы, курсы, училища, который закончил врач.",
+                                "По пунктно описаны медецинские ВУЗы, курсы, училища, который закончил врач."
+                            },
+                            PerformedProcedures = new List<string> 
+                            {
+                                "Какие процедуры может выполнять врач.",
+                                "Какие процедуры может выполнять врач.",
+                                "Какие процедуры может выполнять врач."
+                            },
+                            TreatmentOfDiseases = new List<string> 
+                            {
+                                "Заболевание, которое может вылечить врач.",
+                                "Заболевание, которое может вылечить врач.",
+                                "Заболевание, которое может вылечить врач."
+                            }
                         });
                 }
                 _db.SaveChanges();
