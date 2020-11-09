@@ -18,6 +18,7 @@ namespace Doctor.Models
         public List<string> Education { get; set; }
         public List<string> PerformedProcedures { get; set; }
         public List<string> TreatmentOfDiseases { get; set; }
+        public int Rating { get; set; }
     }
     public class EmployeeSpecialties
     {

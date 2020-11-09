@@ -18,7 +18,7 @@ namespace Doctor.Service
             _db = dbContext;
             if (!_db.Employees.Any())
             {
-                for (int i = 0; i < 4; i++)
+                for (int i = 0; i < 5; i++)
                 {
                     _db.Employees.Add(
                         new Employee
@@ -55,7 +55,8 @@ namespace Doctor.Service
                                 "Заболевание, которое может вылечить врач.",
                                 "Заболевание, которое может вылечить врач.",
                                 "Заболевание, которое может вылечить врач."
-                            }
+                            },
+                            Rating = i
                         });
                 }
                 _db.SaveChanges();
