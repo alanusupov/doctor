@@ -23,7 +23,7 @@ namespace Doctor.Service
                     _db.Employees.Add(
                         new Employee
                         {
-                            Name = "Анатолий Анатольев Анатольевич "+i,
+                            FullName = "Анатолий Анатольев Анатольевич "+i,
                             Email = i + "qwe@gmail.com",
                             ImgUrl = "/img/doc.jpg",
                             EmployeeSpecialties = new List<EmployeeSpecialties> { 
@@ -67,7 +67,7 @@ namespace Doctor.Service
         {
             var _employee = new Employee
             {
-                Name = employee.Name,
+                FullName = employee.FullName,
                 Email = employee.Email,
                 ImgUrl = employee.ImgUrl,
                 EmployeeSpecialties = employee.EmployeeSpecialties,
@@ -111,7 +111,7 @@ namespace Doctor.Service
 
             if(_employee != null)
             {
-                _employee.Name = employee.Name;
+                _employee.FullName = employee.FullName;
                 _employee.Email = employee.Email;
                 _employee.ImgUrl = employee.ImgUrl;
                 _employee.EmployeeSpecialties = employee.EmployeeSpecialties;

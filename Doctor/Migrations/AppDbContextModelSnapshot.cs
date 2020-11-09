@@ -60,10 +60,10 @@ namespace Doctor.Migrations
                     b.Property<int>("Experience")
                         .HasColumnType("integer");
 
-                    b.Property<string>("ImgUrl")
+                    b.Property<string>("FullName")
                         .HasColumnType("text");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("ImgUrl")
                         .HasColumnType("text");
 
                     b.Property<List<string>>("PerformedProcedures")

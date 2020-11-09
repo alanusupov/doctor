@@ -11,8 +11,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Doctor.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20201103195304_init3")]
-    partial class init3
+    [Migration("20201109104535_init1")]
+    partial class init1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -62,14 +62,17 @@ namespace Doctor.Migrations
                     b.Property<int>("Experience")
                         .HasColumnType("integer");
 
-                    b.Property<string>("ImgUrl")
+                    b.Property<string>("FullName")
                         .HasColumnType("text");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("ImgUrl")
                         .HasColumnType("text");
 
                     b.Property<List<string>>("PerformedProcedures")
                         .HasColumnType("text[]");
+
+                    b.Property<int>("Rating")
+                        .HasColumnType("integer");
 
                     b.Property<List<string>>("TreatmentOfDiseases")
                         .HasColumnType("text[]");
@@ -115,13 +118,13 @@ namespace Doctor.Migrations
                     b.Property<DateTime>("DateOfReceipt")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<int?>("EmployeeId")
+                    b.Property<int>("EmployeeId")
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("Registered")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<int?>("SpecialtyId")
+                    b.Property<int>("SpecialtyId")
                         .HasColumnType("integer");
 
                     b.Property<string>("Status")
@@ -130,10 +133,6 @@ namespace Doctor.Migrations
                     b.HasKey("ReceptionId");
 
                     b.HasIndex("ClientId");
-
-                    b.HasIndex("EmployeeId");
-
-                    b.HasIndex("SpecialtyId");
 
                     b.ToTable("Receptions");
                 });
@@ -165,14 +164,6 @@ namespace Doctor.Migrations
                     b.HasOne("Doctor.Models.Client", "Client")
                         .WithMany()
                         .HasForeignKey("ClientId");
-
-                    b.HasOne("Doctor.Models.Employee", "Employee")
-                        .WithMany()
-                        .HasForeignKey("EmployeeId");
-
-                    b.HasOne("Doctor.Models.Specialty", "Specialty")
-                        .WithMany()
-                        .HasForeignKey("SpecialtyId");
                 });
 #pragma warning restore 612, 618
         }
