@@ -23,10 +23,8 @@ namespace Doctor.Service
             if (uploadedFile != null)
             {
                 path = PathImg + Guid.NewGuid() + "." + uploadedFile.FileName.Split('.')[1];
-                using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
-                {
-                    await uploadedFile.CopyToAsync(fileStream);
-                }
+                using var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create);
+                await uploadedFile.CopyToAsync(fileStream);
             }
 
             return path;

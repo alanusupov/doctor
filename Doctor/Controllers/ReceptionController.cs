@@ -20,10 +20,12 @@ namespace Doctor.Controllers
             _receptionService = receptionService;
         }
         [HttpGet("Employee/{id}/{dateTime}")]
-        public async Task<List<string>> GetDateOfReceptions(int id, DateTime dateTime)
+        public async Task<ActionResult<List<string>>> GetDateOfReceptions(int id, DateTime dateTime)
         {
             var result = await _receptionService.GetDateOfReceptions(id, dateTime);
-            return result;
+            if (result == null)
+                return BadRequest();
+            return Ok(result);
         }
     }
 }

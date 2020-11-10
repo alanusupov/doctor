@@ -21,33 +21,52 @@ namespace Doctor.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<T>> Get()
+        public async Task<ActionResult<IEnumerable<T>>> Get()
         {
-            return await _genericService.GetAllAsync();
+            var result = await _genericService.GetAllAsync();
+            if (result == null)
+                return NotFound();
+            return Ok(result);
         }
         
         [HttpGet("{id}")]
-        public async Task<T> Get(int id)
+        public async Task<ActionResult<T>> Get(int id)
         {
-            return await _genericService.GetByIdAsync(id);
+            var result = await _genericService.GetByIdAsync(id);
+            if (result == null)
+                return NotFound();
+            return Ok(result);
         }
  
         [HttpPost]
-        public async Task<T> Post([FromBody] T value)
+        public async Task<ActionResult<T>> Post([FromBody] T value)
         {
-            return await _genericService.AddAsync(value);
+            if (value == null)
+                return BadRequest();
+            var result = await _genericService.AddAsync(value);
+            if (result == null)
+                return NotFound();
+            return Ok(result);
         }
 
         [HttpPut]
-        public async Task<T> Put([FromBody] T value)
-        { 
-            return await _genericService.UpdateAsync(value);
+        public async Task<ActionResult<T>> Put([FromBody] T value)
+        {
+            if (value == null)
+                return BadRequest();
+            var result = await _genericService.UpdateAsync(value);
+            if (result == null)
+                return NotFound();
+            return Ok(result);
         }
 
         [HttpDelete("{id}")]
-        public async Task<T> Delete(int id)
+        public async Task<ActionResult<T>> Delete(int id)
         {
-            return await _genericService.DeleteAsync(id);
+            var result = await _genericService.DeleteAsync(id);
+            if (result == null)
+                return NotFound();
+            return Ok(result);
         }
     }
 }

@@ -101,7 +101,7 @@ namespace Doctor.Service
 
         public async Task<Employee> GetByIdAsync(int id)
         {
-            var _employee = await _db.Employees.FindAsync(id);
+            var _employee = await _db.Employees.Include(x => x.EmployeeSpecialties).FirstOrDefaultAsync(x => x.EmployeeId == id);
             return _employee;
         }
 

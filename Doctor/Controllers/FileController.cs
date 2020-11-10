@@ -20,23 +20,29 @@ namespace Doctor.Controllers
             _fileService = fileService;
         }
         [HttpPost]
-        public async Task<string> AddFile(IFormFile uploadedFile)
+        public async Task<ActionResult<string>> AddFile(IFormFile uploadedFile)
         {
-            var path = await _fileService.AddFile(uploadedFile);
-            return path;
+            var result = await _fileService.AddFile(uploadedFile);
+            if (result == "")
+                return BadRequest();
+            return Ok(result);
         }
         [HttpPut]
-        public async Task<string> UpdateFile(string oldFilePath, IFormFile uploadedFile)
+        public async Task<ActionResult<string>> UpdateFile(string oldFilePath, IFormFile uploadedFile)
         {
-            var path = await _fileService.UpdateFile(oldFilePath, uploadedFile);
-            return path;
+            var result = await _fileService.UpdateFile(oldFilePath, uploadedFile);
+            if (result == "")
+                return BadRequest();
+            return Ok(result);
         }
 
         [HttpDelete]
-        public async Task<string> DeleteFile(string filePath)
+        public async Task<ActionResult<string>> DeleteFile(string filePath)
         {
-            var path = await _fileService.DeleteFile(filePath);
-            return path;
+            var result = await _fileService.DeleteFile(filePath);
+            if (result == "")
+                return BadRequest();
+            return Ok(result);
         }
     }
 }
