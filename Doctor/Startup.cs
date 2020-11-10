@@ -2,6 +2,7 @@ using Doctor.Data;
 using Doctor.IService;
 using Doctor.Models;
 using Doctor.Service;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -11,7 +12,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Text;
 
 namespace Doctor
 {
@@ -44,7 +47,20 @@ namespace Doctor
                 configuration.RootPath = "ClientApp/build";
             });
             services.AddDbContext<AppDbContext>(p => p.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
-            
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(option =>
+                {
+                    option.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = Configuration["Jwt:Issuer"],
+                        ValidAudience = Configuration["Jwt:Issuer"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
+                    };
+                });
             services.AddScoped<IGenericService<Specialty>, SpecialtyService>();
             services.AddScoped<IGenericService<Employee>, EmployeeService>();
             services.AddScoped<IGenericService<Reception>, ReceptionService>();
@@ -79,6 +95,9 @@ namespace Doctor
             app.UseRouting();
 
             app.UseCors(builder => builder.AllowAnyOrigin());
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
