@@ -18,13 +18,17 @@ namespace Doctor.Service
              string [] spec = { "Педиатр", "Кардиолог" , "Инфекционисты", "Дерматовенеролог", "Гинекология", "Уролог", "Семейные врачи", "Терапевт", "ЛОР врач" };
             if (!_db.Specialties.Any())
             {
+                int i = 1;
                 foreach(string item in spec)
                 {
                     _db.Specialties.Add(
                         new Specialty
                         {
-                            Name = item
+                            Name = item,
+                            Price = 300,
+                            Priority = i
                         });
+                    i++;
                 }
                 _db.SaveChanges();
             }
@@ -34,7 +38,9 @@ namespace Doctor.Service
         {
             var _specialty = new Specialty
             {
-                Name = specialty.Name
+                Name = specialty.Name,
+                Price = specialty.Price,
+                Priority = specialty.Priority
             };
             await _db.Specialties.AddAsync(_specialty);
             await _db.SaveChangesAsync();
@@ -70,6 +76,8 @@ namespace Doctor.Service
             if (_specialty != null)
             {
                 _specialty.Name = specialty.Name;
+                _specialty.Price = specialty.Price;
+                _specialty.Priority = specialty.Priority;
                 try
                 {
                     await _db.SaveChangesAsync();

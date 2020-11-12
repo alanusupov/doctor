@@ -9,5 +9,7 @@ namespace Doctor.Models
     {
         public int SpecialtyId { get; set; }
         public string Name { get; set; }
+        public int Price { get; set; }
+        public int Priority { get; set; }
     }
 }

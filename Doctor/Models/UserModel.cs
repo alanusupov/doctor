@@ -6,11 +6,24 @@ using System.Threading.Tasks;
 
 namespace Doctor.Models
 {
-    public class UserModel
+    public class User
     {
+        public int UserId { get; set; }
+        [Required]
         public string UserName { get; set; }
+        [Required]
         public string Pass { get; set; }
-        public string Email { get; set; }
+        [Required]
+        public string Role { get; set; }
+    }
+    public class UserAdmin
+    {
+        public int UserAdminId { get; set; } = 1;
+        [Required]
+        public string UserName { get; set; }
+        [Required]
+        public string Pass { get; set; }
+        [Required]
         public string Role { get; set; }
     }
     public class AuthenticateRequest

@@ -11,6 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
+using Doctor.Service;
 
 namespace Doctor.Controllers
 {
@@ -19,66 +20,33 @@ namespace Doctor.Controllers
     [ApiController]
     public class LoginController : ControllerBase
     {
-        private IConfiguration _config;
-
-        public LoginController(IConfiguration config)
+        UserService _userService;
+        public LoginController(UserService userService)
         {
-            _config = config;
+            _userService = userService;
         }
 
         [AllowAnonymous]
-        [HttpGet]
-        public IActionResult Login(AuthenticateRequest model)
+        [HttpPost]
+        public async Task<IActionResult> Login(AuthenticateRequest model)
         {
-            UserModel login = new UserModel();
+            User login = new User();
             login.UserName = model.Username;
             login.Pass = model.Password;
 
             IActionResult response = Unauthorized();
 
-            var user = AuthenticateUser(login);
-            if (user.UserName != null)
+            var user = await _userService.AuthenticateUserAsync(login);
+            if (user != null)
             {
-                var tokenString = GenerateJSONWebToken(user);
-                response = Ok(new { email = user.Email, token = tokenString });
+                var tokenString = _userService.GenerateJSONWebToken(user);
+                response = Ok(new { userName = user.UserName, role = user.Role, token = tokenString });
             }
             return response;
         }
-        private UserModel AuthenticateUser(UserModel login)
-        {
-            var user = new UserModel();
-            //demo static user
-            if (login.UserName == "qweyn" && login.Pass == "123")
-            {
-                user = new UserModel { UserName = "qweyn", Email = "qweyn@gmail.com", Pass = "123", Role = "admin" };
-            }
-            return user;
-        }
-        private string GenerateJSONWebToken(UserModel userInfo)
-        {
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
-            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-
-            var claims = new[]
-            {
-                new Claim(JwtRegisteredClaimNames.Sub, userInfo.UserName),
-                new Claim(JwtRegisteredClaimNames.Email, userInfo.Email),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(ClaimTypes.Role, userInfo.Role)
-            };
-
-            var token = new JwtSecurityToken(
-                issuer: _config["Jwt:Issuer"],
-                audience: _config["Jwt:Issuer"],
-                claims,
-                expires: DateTime.Now.AddMinutes(20),
-                signingCredentials: credentials);
-            var encodetoken = new JwtSecurityTokenHandler().WriteToken(token);
-            return encodetoken;
-        }
 
         [Authorize(Roles = "admin")]
-        [HttpPost]
+        [HttpPost("admin")]
         public IActionResult Post([FromBody] string value)
         {
             try

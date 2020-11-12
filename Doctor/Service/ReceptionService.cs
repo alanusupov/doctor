@@ -12,15 +12,17 @@ namespace Doctor.Service
     public class ReceptionService : IGenericService<Reception>
     {
         readonly AppDbContext _db;
+        readonly EmailService _emailService;
         public static class Status
         {
             public static string Approved = "Одобрено";
             public static string Canceled = "Отмененные";
             public static string Pending = "В ожидании";
         }
-        public ReceptionService(AppDbContext dbContext)
+        public ReceptionService(AppDbContext dbContext, EmailService emailService)
         {
             _db = dbContext;
+            _emailService = emailService;
             if (!_db.Receptions.Any())
             {
                 _db.Receptions.Add(
@@ -60,6 +62,7 @@ namespace Doctor.Service
             };
             await _db.Receptions.AddAsync(_reception);
             await _db.SaveChangesAsync();
+            _emailService.Send("",_reception.Status,_reception.Registered.ToString());
             return _reception;
         }
 
