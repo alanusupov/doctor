@@ -20,7 +20,7 @@ namespace Doctor.Controllers
             _receptionService = receptionService;
         }
         [HttpGet("Employee/{id}/{dateTime}")]
-        public async Task<ActionResult<Dictionary<string,string>>> GetDateOfReceptions(int id, DateTime dateTime)
+        public async Task<ActionResult<Dictionary<string,string>>> GetDateOfReceptions(int id, string dateTime)
         {
             var result = await _receptionService.GetDateOfReceptions(id, dateTime);
             if (result == null)
