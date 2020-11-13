@@ -114,13 +114,22 @@ namespace Doctor.Service
         }
         private bool ReceptionExists(long id) =>
          _db.Receptions.Any(e => e.ReceptionId == id);
-        public async Task<List<string>> GetDateOfReceptions(int id,DateTime date)
+        public async Task<List<DateTimeReception>> GetDateOfReceptions(int id,DateTime date)
         {
             var reception = await _db.Receptions.Where(x => x.DateOfReceipt >= date && x.DateOfReceipt < date.AddDays(1) && x.EmployeeId == id).ToListAsync();
-            var result = new List<string>();
-            foreach(Reception item in reception)
+            var result = new List<DateTimeReception>();
+            for(int i = 0;i < 8;i++)
             {
-                result.Add(item.DateOfReceipt.ToString("hh"));
+                int j = 0;
+                if (int.Parse(reception[j].DateOfReceipt.ToString("hh")) == i+9)
+                {
+                    result.Add(new DateTimeReception { dateTime = reception[j].DateOfReceipt.ToString("hh"), status = "disable" });
+                    j++;
+                }
+                else
+                {
+                    result.Add(new DateTimeReception { dateTime = (i+9).ToString(), status = "enable" });
+                }
             }
             return result;
         }

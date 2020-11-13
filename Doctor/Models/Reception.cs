@@ -15,8 +15,9 @@ namespace Doctor.Models
         public string Status { get; set; }
         public DateTime Registered { get; set; }
     }
-    public class FrontReception
+    public class DateTimeReception
     {
-
+        public string dateTime { get; set; }
+        public string status { get; set; }
     }
 }
