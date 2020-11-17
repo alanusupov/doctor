@@ -57,8 +57,8 @@ namespace Doctor.Service
                 DateOfReceipt = reception.DateOfReceipt,
                 EmployeeId = reception.EmployeeId,
                 Client = reception.Client,
-                Status = reception.Status,
-                Registered = reception.Registered
+                Status = Status.Pending,
+                Registered = DateTime.Now
             };
             await _db.Receptions.AddAsync(_reception);
             await _db.SaveChangesAsync();
