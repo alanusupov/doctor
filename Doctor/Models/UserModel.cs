@@ -18,7 +18,7 @@ namespace Doctor.Models
     }
     public class UserAdmin
     {
-        public int UserAdminId { get; set; } = 1;
+        public int UserAdminId { get; set; }
         [Required]
         public string UserName { get; set; }
         [Required]

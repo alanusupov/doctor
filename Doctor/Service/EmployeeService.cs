@@ -13,8 +13,11 @@ namespace Doctor.Service
     public class EmployeeService : IGenericService<Employee>
     {
         readonly AppDbContext _db;
-        public EmployeeService(AppDbContext dbContext)
+        readonly FileService _file;
+        
+        public EmployeeService(AppDbContext dbContext, FileService file)
         {
+            _file = file;
             _db = dbContext;
             if (!_db.Employees.Any())
             {
@@ -87,7 +90,8 @@ namespace Doctor.Service
         {
             var _employee = await _db.Employees.Include(x => x.EmployeeSpecialties).FirstOrDefaultAsync(x => x.EmployeeId == id);
             if (_employee != null)
-            {   
+            {
+                _file.DeleteFile(_employee.ImgUrl);
                 _db.Employees.Remove(_employee);
                 await _db.SaveChangesAsync();
             }

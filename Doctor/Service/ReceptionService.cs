@@ -28,9 +28,9 @@ namespace Doctor.Service
                 _db.Receptions.Add(
                     new Reception
                     {
-                         SpecialtyId = _db.Specialties.First().SpecialtyId,
+                         Specialty = _db.Specialties.First(),
                          DateOfReceipt = DateTime.UtcNow,
-                         EmployeeId = _db.Employees.First().EmployeeId,
+                         Employee = _db.Employees.First(),
                          Client = new Client { Name = "FIO", Phone = "0987654321", Email = "qwe@gmail.com" },
                          Status = Status.Approved,
                          Registered = DateTime.UtcNow
@@ -38,9 +38,9 @@ namespace Doctor.Service
                 _db.Receptions.Add(
                     new Reception
                     {
-                         SpecialtyId = _db.Specialties.First().SpecialtyId,
+                         Specialty = _db.Specialties.First(),
                          DateOfReceipt = DateTime.UtcNow,
-                         EmployeeId = _db.Employees.First().EmployeeId,
+                         Employee = _db.Employees.First(),
                          Client = new Client { Name = "FIO", Phone = "0987654321", Email = "qwe@gmail.com" },
                          Status = Status.Approved,
                          Registered = DateTime.UtcNow
@@ -53,9 +53,9 @@ namespace Doctor.Service
         {
             var _reception = new Reception
             {
-                SpecialtyId = reception.SpecialtyId,
-                DateOfReceipt = reception.DateOfReceipt,
-                EmployeeId = reception.EmployeeId,
+                Specialty = reception.Specialty,
+                DateOfReceipt = Convert.ToDateTime(reception.DateOfReceipt),
+                Employee = reception.Employee,
                 Client = reception.Client,
                 Status = Status.Pending,
                 Registered = DateTime.Now
@@ -94,9 +94,9 @@ namespace Doctor.Service
 
             if (_reception != null)
             {
-                _reception.SpecialtyId = reception.SpecialtyId;
+                _reception.Specialty = reception.Specialty;
                 _reception.DateOfReceipt = reception.DateOfReceipt;
-                _reception.EmployeeId = reception.EmployeeId;
+                _reception.Employee = reception.Employee;
                 _reception.Client = reception.Client;
                 _reception.Status = reception.Status;
                 _reception.Registered = reception.Registered;
@@ -117,7 +117,7 @@ namespace Doctor.Service
         public async Task<List<DateTimeReception>> GetDateOfReceptions(int id,string dateTime)
         {
             var date = Convert.ToDateTime(dateTime);
-            var reception = await _db.Receptions.Where(x => x.DateOfReceipt >= date && x.DateOfReceipt < date.AddDays(1) && x.EmployeeId == id).ToListAsync();
+            var reception = await _db.Receptions.Include(x => x.Employee.EmployeeId == id).Where(x => x.DateOfReceipt >= date && x.DateOfReceipt < date.AddDays(1)).ToListAsync();
             var result = new List<DateTimeReception>();
             if (reception.Count > 0)
             {   
