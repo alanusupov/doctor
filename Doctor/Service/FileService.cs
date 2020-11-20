@@ -54,6 +54,7 @@ namespace Doctor.Service
         public async Task<string> DeleteFile(string filePath)
         {
             var result = "";
+            filePath = filePath.Split("/").Last();
             try
             {
                 if (File.Exists(Path.Combine(_appEnvironment.WebRootPath + PathImg, filePath)))
