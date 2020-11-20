@@ -81,6 +81,28 @@ namespace Doctor.Service
         {
             return await _db.Receptions.Include(x => x.Client).ToListAsync();
         }
+        public async Task<IEnumerable<ReceptionGet>> GetAllAsync1()
+        {
+            var reception =  await _db.Receptions.Include(x => x.Client)
+                .Include(x => x.Specialty)
+                .Include(x => x.Employee).ToListAsync();
+            var receptionGet = new List<ReceptionGet>();
+            foreach(Reception item in reception)
+            {
+                receptionGet.Add(new ReceptionGet { 
+                    ReceptionId = item.ReceptionId,
+                    Client = item.Client,
+                    DateOfReceipt = item.DateOfReceipt,
+                    EmployeeId = item.Employee.EmployeeId,
+                    EmployeeFullName = item.Employee.FullName,
+                    SpecialtyId = item.Specialty.SpecialtyId,
+                    SpecialtyName = item.Specialty.Name,
+                    Registered = item.Registered,
+                    Status = item.Status
+                });
+            }
+            return receptionGet;
+        }
 
         public async Task<Reception> GetByIdAsync(int id)
         {
@@ -142,7 +164,6 @@ namespace Doctor.Service
                     result.Add(new DateTimeReception { dateTime = (i + 9).ToString(), status = "enable" });    
                 }
             }
-            
             return result;
         }
     }

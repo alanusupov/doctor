@@ -11,8 +11,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Doctor.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20201112110700_init1")]
-    partial class init1
+    [Migration("20201120121211_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -118,13 +118,13 @@ namespace Doctor.Migrations
                     b.Property<DateTime>("DateOfReceipt")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<int>("EmployeeId")
+                    b.Property<int?>("EmployeeId")
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("Registered")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<int>("SpecialtyId")
+                    b.Property<int?>("SpecialtyId")
                         .HasColumnType("integer");
 
                     b.Property<string>("Status")
@@ -133,6 +133,10 @@ namespace Doctor.Migrations
                     b.HasKey("ReceptionId");
 
                     b.HasIndex("ClientId");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.HasIndex("SpecialtyId");
 
                     b.ToTable("Receptions");
                 });
@@ -218,6 +222,14 @@ namespace Doctor.Migrations
                     b.HasOne("Doctor.Models.Client", "Client")
                         .WithMany()
                         .HasForeignKey("ClientId");
+
+                    b.HasOne("Doctor.Models.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId");
+
+                    b.HasOne("Doctor.Models.Specialty", "Specialty")
+                        .WithMany()
+                        .HasForeignKey("SpecialtyId");
                 });
 #pragma warning restore 612, 618
         }

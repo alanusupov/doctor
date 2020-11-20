@@ -5,7 +5,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Doctor.Migrations
 {
-    public partial class init1 : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -92,30 +92,6 @@ namespace Doctor.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Receptions",
-                columns: table => new
-                {
-                    ReceptionId = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    SpecialtyId = table.Column<int>(nullable: false),
-                    DateOfReceipt = table.Column<DateTime>(nullable: false),
-                    EmployeeId = table.Column<int>(nullable: false),
-                    ClientId = table.Column<int>(nullable: true),
-                    Status = table.Column<string>(nullable: true),
-                    Registered = table.Column<DateTime>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Receptions", x => x.ReceptionId);
-                    table.ForeignKey(
-                        name: "FK_Receptions_Clients_ClientId",
-                        column: x => x.ClientId,
-                        principalTable: "Clients",
-                        principalColumn: "ClientId",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "EmployeeSpecialties",
                 columns: table => new
                 {
@@ -135,6 +111,42 @@ namespace Doctor.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Receptions",
+                columns: table => new
+                {
+                    ReceptionId = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    SpecialtyId = table.Column<int>(nullable: true),
+                    DateOfReceipt = table.Column<DateTime>(nullable: false),
+                    EmployeeId = table.Column<int>(nullable: true),
+                    ClientId = table.Column<int>(nullable: true),
+                    Status = table.Column<string>(nullable: true),
+                    Registered = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Receptions", x => x.ReceptionId);
+                    table.ForeignKey(
+                        name: "FK_Receptions_Clients_ClientId",
+                        column: x => x.ClientId,
+                        principalTable: "Clients",
+                        principalColumn: "ClientId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Receptions_Employees_EmployeeId",
+                        column: x => x.EmployeeId,
+                        principalTable: "Employees",
+                        principalColumn: "EmployeeId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Receptions_Specialties_SpecialtyId",
+                        column: x => x.SpecialtyId,
+                        principalTable: "Specialties",
+                        principalColumn: "SpecialtyId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_EmployeeSpecialties_EmployeeId",
                 table: "EmployeeSpecialties",
@@ -144,6 +156,16 @@ namespace Doctor.Migrations
                 name: "IX_Receptions_ClientId",
                 table: "Receptions",
                 column: "ClientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Receptions_EmployeeId",
+                table: "Receptions",
+                column: "EmployeeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Receptions_SpecialtyId",
+                table: "Receptions",
+                column: "SpecialtyId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -155,19 +177,19 @@ namespace Doctor.Migrations
                 name: "Receptions");
 
             migrationBuilder.DropTable(
-                name: "Specialties");
-
-            migrationBuilder.DropTable(
                 name: "UserAdmin");
 
             migrationBuilder.DropTable(
                 name: "Users");
 
             migrationBuilder.DropTable(
+                name: "Clients");
+
+            migrationBuilder.DropTable(
                 name: "Employees");
 
             migrationBuilder.DropTable(
-                name: "Clients");
+                name: "Specialties");
         }
     }
 }
