@@ -36,7 +36,7 @@ namespace Doctor.Controllers
             return Ok(result);
         }
         [HttpPost("Post")]
-        public async Task<ActionResult<ReceptionGet>> PostReceptions([FromForm] ReceptionPost reception)
+        public async Task<ActionResult<ReceptionGet>> PostReceptions([FromBody] ReceptionPost reception)
         {
             var result = await _receptionService.AddAsync1(reception);
             if (result == null)
