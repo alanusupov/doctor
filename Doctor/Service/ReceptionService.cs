@@ -155,7 +155,7 @@ namespace Doctor.Service
         public async Task<List<DateTimeReception>> GetDateOfReceptions(int id,string dateTime)
         {
             var date = Convert.ToDateTime(dateTime);
-            var reception = await _db.Receptions.Include(x => x.Employee.EmployeeId == id).Where(x => x.DateOfReceipt >= date && x.DateOfReceipt < date.AddDays(1)).ToListAsync();
+            var reception = await _db.Receptions.Include(x => x.Employee).Where(x => x.DateOfReceipt >= date && x.DateOfReceipt < date.AddDays(1) && x.Employee.EmployeeId == id).ToListAsync();
             var result = new List<DateTimeReception>();
             if (reception.Count > 0)
             {   
