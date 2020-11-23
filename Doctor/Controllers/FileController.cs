@@ -20,7 +20,7 @@ namespace Doctor.Controllers
             _fileService = fileService;
         }
         [HttpPost]
-        public async Task<ActionResult<string>> AddFile(IFormFile uploadedFile)
+        public async Task<ActionResult<string>> AddFile([FromBody]IFormFile uploadedFile)
         {
             var result = await _fileService.AddFile(uploadedFile);
             if (result == "")
