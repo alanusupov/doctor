@@ -74,7 +74,7 @@ namespace Doctor.Service
                 Employee = await _db.Employees.Include(x => x.EmployeeSpecialties).FirstOrDefaultAsync(x => x.EmployeeId == reception.EmployeeId),
                 Client = reception.Client,
                 Status = Status.Pending,
-                Registered = DateTime.Now
+                Registered = DateTime.UtcNow
             };
             await _db.Receptions.AddAsync(_reception);
             await _db.SaveChangesAsync();
