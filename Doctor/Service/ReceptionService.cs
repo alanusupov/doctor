@@ -49,13 +49,13 @@ namespace Doctor.Service
             }
         }
 
-        public async Task<Reception> AddAsync(Reception reception)
+        public async Task<Reception> AddAsync(ReceptionPost reception)
         {
             var _reception = new Reception
             {
-                Specialty = reception.Specialty,
+                Specialty = await _db.Specialties.FindAsync(reception.SpecialtyId),
                 DateOfReceipt = Convert.ToDateTime(reception.DateOfReceipt),
-                Employee = reception.Employee,
+                Employee = await _db.Employees.Include(x => x.EmployeeSpecialties).FirstOrDefaultAsync(x => x.EmployeeId == reception.EmployeeId),
                 Client = reception.Client,
                 Status = Status.Pending,
                 Registered = DateTime.Now
