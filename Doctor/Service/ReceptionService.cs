@@ -49,7 +49,23 @@ namespace Doctor.Service
             }
         }
 
-        public async Task<Reception> AddAsync(ReceptionPost reception)
+        public async Task<Reception> AddAsync(Reception reception)
+        {
+            var _reception = new Reception
+            {
+                Specialty = reception.Specialty,
+                DateOfReceipt = Convert.ToDateTime(reception.DateOfReceipt),
+                Employee = reception.Employee,
+                Client = reception.Client,
+                Status = Status.Pending,
+                Registered = DateTime.Now
+            };
+            await _db.Receptions.AddAsync(_reception);
+            await _db.SaveChangesAsync();
+            _emailService.Send("",_reception.Status,_reception.Registered.ToString());
+            return _reception;
+        }
+        public async Task<Reception> AddAsync1(ReceptionPost reception)
         {
             var _reception = new Reception
             {
@@ -62,7 +78,7 @@ namespace Doctor.Service
             };
             await _db.Receptions.AddAsync(_reception);
             await _db.SaveChangesAsync();
-            _emailService.Send("",_reception.Status,_reception.Registered.ToString());
+            _emailService.Send("", _reception.Status, _reception.Registered.ToString());
             return _reception;
         }
 
