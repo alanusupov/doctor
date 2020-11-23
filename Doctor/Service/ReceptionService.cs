@@ -169,7 +169,7 @@ namespace Doctor.Service
                     }
                     else
                     {
-                        result.Add(new DateTimeReception { dateTime = (i).ToString(), status = "enable" });
+                        result.Add(new DateTimeReception { dateTime = (i+9).ToString(), status = "enable" });
                     }
                 }
             }
@@ -177,7 +177,7 @@ namespace Doctor.Service
             {
                 for (int i = 0; i < 8; i++)
                 {
-                    result.Add(new DateTimeReception { dateTime = (i).ToString(), status = "enable" });    
+                    result.Add(new DateTimeReception { dateTime = (i + 9).ToString(), status = "enable" });    
                 }
             }
             return result;
