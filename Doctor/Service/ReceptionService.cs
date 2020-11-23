@@ -162,14 +162,14 @@ namespace Doctor.Service
                 for(int i = 0;i < 8;i++)
                 {
                     int j = 0;
-                    if (int.Parse(reception[j].DateOfReceipt.ToString("hh")) == i+9)
+                    if (int.Parse(reception[j].DateOfReceipt.ToString("hh")) == i)
                     {
                         result.Add(new DateTimeReception { dateTime = reception[j].DateOfReceipt.ToString("hh"), status = "disable" });
                         j++;
                     }
                     else
                     {
-                        result.Add(new DateTimeReception { dateTime = (i+9).ToString(), status = "enable" });
+                        result.Add(new DateTimeReception { dateTime = (i).ToString(), status = "enable" });
                     }
                 }
             }
@@ -177,7 +177,7 @@ namespace Doctor.Service
             {
                 for (int i = 0; i < 8; i++)
                 {
-                    result.Add(new DateTimeReception { dateTime = (i + 9).ToString(), status = "enable" });    
+                    result.Add(new DateTimeReception { dateTime = (i).ToString(), status = "enable" });    
                 }
             }
             return result;
