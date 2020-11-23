@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Doctor.Models;
 using Doctor.Service;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -20,9 +21,9 @@ namespace Doctor.Controllers
             _fileService = fileService;
         }
         [HttpPost]
-        public async Task<ActionResult<string>> AddFile([FromBody]IFormFile uploadedFile)
+        public async Task<ActionResult<string>> AddFile([FromBody] FileModel uploadedFile)
         {
-            var result = await _fileService.AddFile(uploadedFile);
+            var result = await _fileService.AddFile(uploadedFile.FormFile);
             if (result == "")
                 return BadRequest();
             return Ok(result);
