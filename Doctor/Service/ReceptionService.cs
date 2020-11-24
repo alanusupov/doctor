@@ -159,7 +159,7 @@ namespace Doctor.Service
             var result = new List<DateTimeReception>();
             if (reception.Count > 0)
             {   
-                for(int i = 0;i < 8;i++)
+                for(int i = 6;i < 18;i++)
                 {
                     int j = 0;
                     if (int.Parse(reception[j].DateOfReceipt.ToString("hh")) == i)
@@ -169,15 +169,15 @@ namespace Doctor.Service
                     }
                     else
                     {
-                        result.Add(new DateTimeReception { dateTime = (i+9).ToString(), status = "enable" });
+                        result.Add(new DateTimeReception { dateTime = i.ToString(), status = "enable" });
                     }
                 }
             }
             else
             {
-                for (int i = 0; i < 8; i++)
+                for (int i = 6; i < 18; i++)
                 {
-                    result.Add(new DateTimeReception { dateTime = (i + 9).ToString(), status = "enable" });    
+                    result.Add(new DateTimeReception { dateTime = i.ToString(), status = "enable" });    
                 }
             }
             return result;
