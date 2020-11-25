@@ -58,7 +58,7 @@ namespace Doctor.Service
                 Employee = reception.Employee,
                 Client = reception.Client,
                 Status = Status.Pending,
-                Registered = DateTime.Now
+                Registered = DateTime.UtcNow
             };
             await _db.Receptions.AddAsync(_reception);
             await _db.SaveChangesAsync();
@@ -84,7 +84,9 @@ namespace Doctor.Service
 
         public async Task<Reception> DeleteAsync(int id)
         {
-            var _reception = await _db.Receptions.Include(x => x.Client.ClientId).FirstOrDefaultAsync(x => x.ReceptionId == id);
+            var _reception = await _db.Receptions.Include(x => x.Client)
+                .Include(x => x.Employee)
+                .Include(x => x.Specialty).FirstOrDefaultAsync(x => x.ReceptionId == id);
             if (_reception != null)
             {
                 _db.Receptions.Remove(_reception);
@@ -155,25 +157,25 @@ namespace Doctor.Service
             var result = new List<DateTimeReception>();
             if (reception.Count > 0)
             {   
-                for(int i = 3;i < 12;i++)
+                for(int i = 9;i < 18;i++)
                 {
                     int j = 0;
-                    if (int.Parse(reception[j].DateOfReceipt.ToUniversalTime().ToString("hh")) == i)
+                    if (int.Parse(reception[j].DateOfReceipt.ToString("hh")) == i-6)
                     {
                         result.Add(new DateTimeReception { dateTime = (int.Parse(reception[j].DateOfReceipt.ToString("hh"))+6).ToString(), status = "disable" });
                         j++;
                     }
                     else
                     {
-                        result.Add(new DateTimeReception { dateTime = (i+6).ToString(), status = "enable" });
+                        result.Add(new DateTimeReception { dateTime = (i).ToString(), status = "enable" });
                     }
                 }
             }
             else
             {
-                for (int i = 3; i < 12; i++)
+                for (int i = 9; i < 18; i++)
                 {
-                    result.Add(new DateTimeReception { dateTime = (i+6).ToString(), status = "enable" });    
+                    result.Add(new DateTimeReception { dateTime = (i).ToString(), status = "enable" });    
                 }
             }
             return result;
