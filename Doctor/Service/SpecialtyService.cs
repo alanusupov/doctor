@@ -59,8 +59,8 @@ namespace Doctor.Service
         }
 
         public async Task<IEnumerable<Specialty>> GetAllAsync()
-        {
-            return await _db.Specialties.ToListAsync();
+        { 
+            return await _db.Specialties.OrderBy(x => x.Priority).ToListAsync();
         }
 
         public async Task<Specialty> GetByIdAsync(int id)

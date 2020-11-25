@@ -65,6 +65,7 @@ namespace Doctor
             services.AddScoped<IGenericService<Specialty>, SpecialtyService>();
             services.AddScoped<IGenericService<Employee>, EmployeeService>();
             services.AddScoped<IGenericService<Reception>, ReceptionService>();
+            services.AddScoped<IGenericService<Client>, ClentService>();
             services.AddScoped<ReceptionService>();
             services.AddScoped<FileService>();
             services.AddScoped<UserService>();
