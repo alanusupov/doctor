@@ -25,4 +25,11 @@ namespace Doctor.Models
         public int EmployeeSpecialtiesId { get; set; }
         public string Name { get; set; }
     }
+    public class TopEmployee
+    {
+        public int EmployeeId { get; set; }
+        public int Reservation { get; set; }
+        public int Hours { get; set; }
+        public int Income { get; set; }
+    }
 }

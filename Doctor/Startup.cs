@@ -67,9 +67,13 @@ namespace Doctor
             services.AddScoped<IGenericService<Reception>, ReceptionService>();
             services.AddScoped<IGenericService<Client>, ClentService>();
             services.AddScoped<ReceptionService>();
+            services.AddScoped<EmployeeService>();
             services.AddScoped<FileService>();
             services.AddScoped<UserService>();
             services.AddScoped<EmailService>();
+            services.AddScoped<StatisticalService>();
+
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -9,16 +9,16 @@ using System.Threading.Tasks;
 
 namespace Doctor.Service
 {
+    public static class Status
+    {
+        public static string Approved = "Одобрено";
+        public static string Canceled = "Отмененные";
+        public static string Pending = "В ожидании";
+    }
     public class ReceptionService : IGenericService<Reception>
     {
         readonly AppDbContext _db;
         readonly EmailService _emailService;
-        public static class Status
-        {
-            public static string Approved = "Одобрено";
-            public static string Canceled = "Отмененные";
-            public static string Pending = "В ожидании";
-        }
         public ReceptionService(AppDbContext dbContext, EmailService emailService)
         {
             _db = dbContext;

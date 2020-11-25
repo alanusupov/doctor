@@ -15,6 +15,7 @@ namespace Doctor.Controllers
     {
         public ClientController(IGenericService<Client> genericService) : base(genericService)
         {
+            
         }
     }
 }
