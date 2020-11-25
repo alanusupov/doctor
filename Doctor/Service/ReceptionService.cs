@@ -132,12 +132,8 @@ namespace Doctor.Service
 
             if (_reception != null)
             {
-                _reception.Specialty = reception.Specialty;
                 _reception.DateOfReceipt = reception.DateOfReceipt;
-                _reception.Employee = reception.Employee;
-                _reception.Client = reception.Client;
                 _reception.Status = reception.Status;
-                _reception.Registered = reception.Registered;
                 try
                 {
                     await _db.SaveChangesAsync();
