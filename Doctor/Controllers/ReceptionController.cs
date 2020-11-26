@@ -43,5 +43,13 @@ namespace Doctor.Controllers
                 return BadRequest();
             return Ok(result);
         }
+        [HttpPut("Put")]
+        public async Task<ActionResult<ReceptionGet>> PutReceptions([FromBody] ReceptionPost reception)
+        {
+            var result = await _receptionService.UpdateAsync1(reception);
+            if (result == null)
+                return BadRequest();
+            return Ok(result);
+        }
     }
 }

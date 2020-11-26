@@ -128,6 +128,41 @@ namespace Doctor.Service
             return _reception;
         }
 
+        public async Task<ReceptionGet> UpdateAsync1(ReceptionPost reception)
+        {
+            var _reception = await _db.Receptions.Include(x => x.Client)
+                .Include(x => x.Specialty)
+                .Include(x => x.Employee).FirstOrDefaultAsync(x => x.ReceptionId == reception.ReceptionId);
+            var _receptionGet = new ReceptionGet();
+                
+            if (_reception != null)
+            {
+                _reception.DateOfReceipt = Convert.ToDateTime(reception.DateOfReceipt);
+                _reception.Status = reception.Status;
+                try
+                {
+                    await _db.SaveChangesAsync();
+                    _receptionGet =new ReceptionGet()
+                    {
+                        ReceptionId = _reception.ReceptionId,
+                        Client = _reception.Client,
+                        DateOfReceipt = _reception.DateOfReceipt,
+                        EmployeeId = _reception.Employee.EmployeeId,
+                        EmployeeFullName = _reception.Employee.FullName,
+                        SpecialtyId = _reception.Specialty.SpecialtyId,
+                        SpecialtyName = _reception.Specialty.Name,
+                        Registered = _reception.Registered,
+                        Status = _reception.Status
+                    };
+                }
+                catch (DbUpdateConcurrencyException) when (!ReceptionExists(reception.ReceptionId))
+                {
+                    return null;
+                }
+                return _receptionGet;
+            }
+            return null;
+        }
         public async Task<Reception> UpdateAsync(Reception reception)
         {
             var _reception = await _db.Receptions.FindAsync(reception.ReceptionId);
