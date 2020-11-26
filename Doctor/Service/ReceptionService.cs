@@ -134,7 +134,7 @@ namespace Doctor.Service
 
             if (_reception != null)
             {
-                _reception.DateOfReceipt = reception.DateOfReceipt;
+                _reception.DateOfReceipt = Convert.ToDateTime(reception.DateOfReceipt);
                 _reception.Status = reception.Status;
                 try
                 {
