@@ -36,9 +36,9 @@ namespace Doctor.Controllers
             return Ok(result);
         }
         [HttpPost("GetStatistics")]
-        public async Task<ActionResult> GetStatistics(string fromDate, string toDate)
+        public async Task<ActionResult> GetStatistics([FromBody] ReceptionStatistical statistical)
         {
-            var result = await _receptionService.GetStatistics(fromDate, toDate);
+            var result = await _receptionService.GetStatistics(statistical);
             if (result == null)
                 return BadRequest();
             return Ok(new {result, reservation = result.Count(), income = result.Count() * 300, hours = result.Count() });

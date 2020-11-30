@@ -99,10 +99,10 @@ namespace Doctor.Service
         {
             return await _db.Receptions.Include(x => x.Client).ToListAsync();
         }
-        public async Task<IEnumerable<ReceptionGet>> GetStatistics(string fromDate, string toDate)
+        public async Task<IEnumerable<ReceptionGet>> GetStatistics(ReceptionStatistical statistical)
         {
-            var _fromDate = Convert.ToDateTime(fromDate);
-            var _toDate = Convert.ToDateTime(toDate);
+            var _fromDate = Convert.ToDateTime(statistical.formDate);
+            var _toDate = Convert.ToDateTime(statistical.toDate);
             var reception = await _db.Receptions.Include(x => x.Client)
                 .Include(x => x.Specialty)
                 .Include(x => x.Employee).Where(x => x.DateOfReceipt >= _fromDate && x.DateOfReceipt < _toDate).ToListAsync();

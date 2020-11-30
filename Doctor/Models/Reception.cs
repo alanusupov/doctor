@@ -42,4 +42,10 @@ namespace Doctor.Models
         public string Status { get; set; }
         public DateTime Registered { get; set; }
     }
+    public class ReceptionStatistical
+    {
+        public string formDate { get; set; }
+        public string toDate { get; set; }
+
+    }
 }
