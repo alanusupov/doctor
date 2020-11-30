@@ -35,6 +35,14 @@ namespace Doctor.Controllers
                 return BadRequest();
             return Ok(result);
         }
+        [HttpGet("GetStatistics")]
+        public async Task<ActionResult> GetStatistics(string fromDate, string toDate)
+        {
+            var result = await _receptionService.GetStatistics(fromDate, toDate);
+            if (result == null)
+                return BadRequest();
+            return Ok(new {result, reservation = result.Count(), income = result.Count() * 300, hours = result.Count() });
+        }
         [HttpPost("Post")]
         public async Task<ActionResult<ReceptionGet>> PostReceptions([FromBody] ReceptionPost reception)
         {
