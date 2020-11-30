@@ -34,8 +34,8 @@ namespace Doctor.Service
                     Income = reception.Count * 300
                 });
             }
-            topEmployee.OrderByDescending(x => x.Reservation);
-            return topEmployee;
+            
+            return topEmployee.OrderByDescending(x => x.Reservation).ToList();
         }
     }
 }
