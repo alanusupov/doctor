@@ -105,7 +105,7 @@ namespace Doctor.Service
             var _toDate = Convert.ToDateTime(statistical.toDate);
             var reception = await _db.Receptions.Include(x => x.Client)
                 .Include(x => x.Specialty)
-                .Include(x => x.Employee).Where(x => x.DateOfReceipt >= _fromDate && x.DateOfReceipt < _toDate).ToListAsync();
+                .Include(x => x.Employee).Where(x => x.DateOfReceipt.Date >= _fromDate.Date && x.DateOfReceipt.Date < _toDate.Date).ToListAsync();
             var receptionGet = new List<ReceptionGet>();
             foreach (Reception item in reception)
             {
