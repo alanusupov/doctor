@@ -101,7 +101,7 @@ namespace Doctor.Service
         }
         public async Task<IEnumerable<ReceptionGet>> GetStatistics(ReceptionStatistical statistical)
         {
-            var _fromDate = Convert.ToDateTime(statistical.formDate);
+            var _fromDate = Convert.ToDateTime(statistical.fromDate);
             var _toDate = Convert.ToDateTime(statistical.toDate);
             var reception = await _db.Receptions.Include(x => x.Client)
                 .Include(x => x.Specialty)
