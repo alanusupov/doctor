@@ -8,13 +8,13 @@ function DoctorReducer(state = initialState, action){
   console.log(state, action);
   switch(action.type){
     case ADD_DOCTOR:
-      return {...state, contacts: [...state.contacts,action.payload]}
+      return {...state, doctors: [...state.doctors,action.payload]}
     case GET_DOCTOR:
-       return {...state, contacts: action.payload}
+       return { ...state, doctors: action.payload };
     case DELETE_DOCTOR:
-      return {...state, contacts: state.contacts.filter(contact => action.payload !== contact.id)}
+      return {...state, doctors: state.doctors.filter(doctor => action.payload !== doctor.employeeId)}
     case UPDATE_DOCTOR:
-      return {...state, contacts: state.contacts.map(item => item.id === action.payload.id ? action.payload : item)}
+      return {...state, doctors: state.doctors.map(item => item.id === action.payload.id ? action.payload : item)}
     default: 
     return state
   }

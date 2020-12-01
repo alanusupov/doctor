@@ -1,0 +1,104 @@
+tr:nth-child(odd){
+  background: #D6F0FF;
+}
+.Component-paginationToolbar-2{
+  background: white !important;
+}
+.MuiPaper-elevation2{
+  margin: 10px !important; 
+}
+td, th{
+  border: #00BDFF 2px solid;
+  text-align: center !important;
+  font-weight: bold !important;
+}
+.MuiTableSortLabel-iconDirectionAsc{
+  color: black;
+}
+th:first-child{
+position: relative;
+}
+
+.adminrec th:first-child:after{
+content: 'Редактор';
+position: absolute;
+top: 15px;
+left: 4px;
+background: white;
+font-size: 10px;
+padding: 3px;
+}
+.rbc-calendar{
+  height: 900px !important;
+}
+
+.rbc-event:focus {
+  /* outline: 5px auto #3b99fc; */
+  border: 1px black solid;
+  width: fit-content;
+}
+.rbc-event-content:focus{
+  overflow: initial;
+  text-overflow: unset;
+}
+.rbc-month-row .rbc-event.rbc-selected {
+  background-color: #00A3FF;
+  z-index: 7;
+  position: relative;
+  z-index: 9;
+  /* height: 120px !important; */
+}
+.rbc-time-view .rbc-event.rbc-selected {
+  background-color: #00A3FF;
+  z-index: 7;
+  position: relative;
+  z-index: 9;
+  height: 120px !important;
+}
+.rbc-day-slot .rbc-event:focus{
+  overflow: initial;
+}
+.rbc-btn-group:nth-child(3) :nth-child(1):after {
+  content: 'Месяц';
+  position: absolute;
+  top: 6px;
+  left: 19%;
+background: white !important;
+}
+.rbc-btn-group:nth-child(3) :nth-child(2):after {
+  content: 'Неделья';
+  position: absolute;
+  top: 6px;
+  left: 7%;
+  background: white !important;
+}
+.rbc-btn-group:nth-child(3) :nth-child(3):after {
+  content: 'День';
+  position: absolute;
+  top: 6px;
+  left: 17%;
+  background: white !important;
+}
+.rbc-btn-group:nth-child(3) :nth-child(4):after {
+  content: 'График';
+  position: absolute;
+  top: 6px;
+  left: 19%;
+  background: white !important;
+}
+.rbc-btn-group:nth-child(1) :nth-child(1):after {
+  content: 'Сегодня';
+  position: absolute;
+  top: 6px;
+  left: 9%;
+  background: white !important;
+}
+.rbc-day-slot .rbc-event:focus{
+  height: 120px !important;
+}
+.rbc-btn-group button{
+  position: relative;
+}
+.rbc-active{
+  background: white !important;
+}

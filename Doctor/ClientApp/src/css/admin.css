@@ -1,0 +1,142 @@
+.admin-wrap{
+  display: flex;
+
+}
+.top-admin{
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25);
+  padding: 6px;
+  display: flex;
+  justify-content: space-between;
+}
+.admin-nav{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 100vh;
+  box-shadow: 1px 0px 2px rgba(0, 0, 0, 0.25);
+}
+.admin-link{
+  color: #333333;
+  font-weight: bold;
+  font-size: 11px;
+  padding: 10px 10px;
+  width: 100%;
+  text-decoration: none !important;
+  
+}
+.admin-link:hover{
+  color: #40BAFF;
+  background:#EBF8FF;
+  
+}
+.admin-nav-div{
+  display: flex;
+  align-items: center;
+  font-size: 10px;
+  color: #939495;
+  margin-left: 5px;
+}
+.admin-nav-line{
+  width: 77px;
+  margin-top: 10px;
+  border-top: 1px solid #939495;
+}
+.slide-rec{
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, #F7F9FF -49.47%, #FFFFFF 56.25%, #F7F9FF 139.71%);
+  box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  width: 193px !important;
+  height: 194px !important;
+  padding: 13px;
+}
+.slick-active{
+  width: 193px !important;
+}
+.slide-name{
+  color: #36B7FF;
+  font-weight: bold;
+}
+.slick-slider{
+  padding: 30px;
+}
+.amain-title{
+  margin: 30px;
+  color: #40BAFF;
+  border: 1px solid #40BAFF;
+  box-sizing: border-box;
+  box-shadow: inset 2px 4px 6px rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
+  padding: 0 10px;
+  max-width: 162px;
+  margin-bottom: 0;
+}
+
+.stat-block{
+  display: flex;
+
+}
+.stat-block div{
+  border: 1px solid black;
+  width: 70px;
+  height: 62px;
+  border-bottom: none ;
+  font-size: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 11px;
+  font-weight: bold;
+}
+.stat-block div span{
+  font-size: 10px;
+  color: #939495;
+  font-weight: bold;
+}
+.stat-span1{
+  margin-top: -19px !important;
+}
+.stat-block div:first-child{
+  border-left: none;
+}
+.stat-block div:last-child{
+  border-right: none;
+}
+.doc-stats{
+  border-radius: 8px;
+  border: black 1px solid;
+  width: fit-content;
+}
+.stat-img{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-top: -4px;
+}
+.VictoryContainer tspan{
+  font-size: 8px !important;
+}
+.stat-input{
+  border-radius: 8px;
+  margin: 10px;
+  border: 1px solid #40BAFF;
+}
+
+
+.Selectable .DayPicker-Day--selected:not(.DayPicker-Day--start):not(.DayPicker-Day--end):not(.DayPicker-Day--outside) {
+  background-color: #f0f8ff !important;
+  color: #4a90e2;
+}
+.Selectable .DayPicker-Day {
+  border-radius: 0 !important;
+}
+.Selectable .DayPicker-Day--start {
+  border-top-left-radius: 50% !important;
+  border-bottom-left-radius: 50% !important;
+}
+.Selectable .DayPicker-Day--end {
+  border-top-right-radius: 50% !important;
+  border-bottom-right-radius: 50% !important;
+}

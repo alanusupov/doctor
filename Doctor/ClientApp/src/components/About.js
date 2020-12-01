@@ -35,7 +35,7 @@ function About() {
             <p className="about-item-sub">Название услуги</p>
         </li>
         <li className="about-item">
-            <img alt='icon' src={flogo5} className='about-icon'></img>
+            <img id="icon5" alt='icon' src={flogo5} className='about-icon'></img>
             <p className="about-item-sub">Название услуги</p>
         </li>
         <li className="about-item">

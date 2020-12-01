@@ -1,4 +1,4 @@
-import {ADD_DOCTOR, GET_DOCTOR, DELETE_DOCTOR, UPDATE_DOCTOR} from './doctors';
+import {ADD_DOCTOR, GET_DOCTOR, DELETE_DOCTOR, UPDATE_DOCTOR} from './constants';
 
 export const getDoctor = (data) =>{
   return({
@@ -13,7 +13,7 @@ export const addNewDoctor = (newDoctor) =>{
     payload: newDoctor
   })
 }
-export const deleteContact = (id) => {
+export const deleteDoctor = (id) => {
   return({
     type: DELETE_DOCTOR,
     payload: id
