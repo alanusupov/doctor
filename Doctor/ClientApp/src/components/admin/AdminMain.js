@@ -14,8 +14,8 @@ import {VictoryChart, VictoryTheme, VictoryLine} from 'victory';
 
 function AdminMain({getReception, ...props}) {
   const [days,setDays] = useState({
-    from: undefined,
-    to: undefined
+    from: null,
+    to: null
   })
   const modifiers = { start: days.from, end: days.to };
   const [locale, setLocale] = useState('ru')
@@ -26,13 +26,22 @@ function AdminMain({getReception, ...props}) {
     const range = DateUtils.addDayToRange(day, days);
     setDays(range);
     console.log(range);
+    days.to ? handleData() : handleData();
     
   }
+ useEffect(() => {
+   
+    setDays(days)
+   console.log(days);
   
+    
+  }, [days]);
+ 
   function handleData(){
-    let obj = {
-      fromDate:   moment(new Date(days.from)).format('YYYY-MM-DD'),
-      toDate: moment(new Date(days.to)).format('YYYY-MM-DD')
+    if(days.to){
+      let obj = {
+      "formDate":   moment(new Date(days.from)).format('YYYY-MM-DD'),
+      "toDate": moment(new Date(days.to)).format('YYYY-MM-DD')
     }
     console.log(obj);
     Axios.post(url + '/api/Reception/GetStatistics', obj).then((res) => {
@@ -42,13 +51,6 @@ function AdminMain({getReception, ...props}) {
       console.log(datas);
     })
 
-    //let newData = datas.result
-    // .map(x => {
-    //   return {
-    //     date: x.result.dateOfReceipt, reception: 1
-    //   }
-    // })
-    
     setDatas(datas);
     console.log(datas.result);
     let newd = datas.result ? datas.result.map(x => {
@@ -60,6 +62,15 @@ function AdminMain({getReception, ...props}) {
     :null
     console.log(newd);
     setRdata(newd)
+    }
+    
+    //let newData = datas.result
+    // .map(x => {
+    //   return {
+    //     date: x.result.dateOfReceipt, reception: 1
+    //   }
+    // })
+    
   }
   
   useEffect(()=> {
@@ -71,7 +82,7 @@ function AdminMain({getReception, ...props}) {
       const { data } = res;
       console.log(res);
       if (data) getReception(data);
-      handleData()
+      console.log(days);
     });
   }, [getReception]);
   console.log(props);
