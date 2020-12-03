@@ -301,9 +301,9 @@
   display: none;
   position: absolute;
   left: -273px;
-  top: 0px;
+  bottom: 0px;
   background: white;
-  min-height: 573.5px;
+  min-height: 577px;
   border-right: 1px solid #D2D2D2;
 }
 .choose-left{

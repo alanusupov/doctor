@@ -18,7 +18,7 @@ function Admin() {
       <BrowserRouter>
       <div className='top-admin'>
      <Link to='/admin'>Admin Panel</Link> 
-    <div onClick={logout}>Logout</div>
+    <div style={{cursor: 'pointer'}} onClick={logout}>Logout</div>
         
       </div>
      <div className='admin-wrap'>

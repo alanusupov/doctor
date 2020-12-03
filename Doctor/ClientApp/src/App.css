@@ -63,6 +63,9 @@ html, body{
  
 }
 
+.top-btn-wrap .main-btn{
+  margin-bottom: 50px;
+}
 .text{
   font-weight: bold;
   font-size: 13px;
@@ -70,6 +73,9 @@ html, body{
   color: #939495;
 }
 @media screen and (min-width: 830px) {
+  .top-block .top-btn{
+    margin-left: 16px;
+  }
   .title{
     font-size: 30px;
   }
