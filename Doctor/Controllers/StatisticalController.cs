@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Doctor.Models;
 using Doctor.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,6 +20,7 @@ namespace Doctor.Controllers
             _statisticalService = statisticalService;
         }
 
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public async Task<ActionResult<List<TopEmployee>>> Get()
         {

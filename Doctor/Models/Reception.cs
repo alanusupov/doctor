@@ -44,7 +44,7 @@ namespace Doctor.Models
     }
     public class ReceptionStatistical
     {
-        public string formDate { get; set; }
+        public string fromDate { get; set; }
         public string toDate { get; set; }
 
     }

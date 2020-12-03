@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Doctor.IService;
 using Doctor.Models;
 using Doctor.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -35,6 +36,7 @@ namespace Doctor.Controllers
                 return BadRequest();
             return Ok(result);
         }
+        [Authorize(Roles = "admin")]
         [HttpPost("GetStatistics")]
         public async Task<ActionResult> GetStatistics([FromBody] ReceptionStatistical statistical)
         {
@@ -43,6 +45,7 @@ namespace Doctor.Controllers
                 return BadRequest();
             return Ok(new {result, reservation = result.Count(), income = result.Count() * 300, hours = result.Count() });
         }
+        [Authorize(Roles = "admin")]
         [HttpPost("Post")]
         public async Task<ActionResult<ReceptionGet>> PostReceptions([FromBody] ReceptionPost reception)
         {
@@ -51,6 +54,7 @@ namespace Doctor.Controllers
                 return BadRequest();
             return Ok(result);
         }
+        [Authorize(Roles = "admin")]
         [HttpPut("Put")]
         public async Task<ActionResult<ReceptionGet>> PutReceptions([FromBody] ReceptionPost reception)
         {

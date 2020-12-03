@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace Doctor.Service
 {
-    public class ClentService : IGenericService<Client>
+    public class ClientService : IGenericService<Client>
     {
         readonly AppDbContext _db;
-        public ClentService(AppDbContext dbContext)
+        public ClientService(AppDbContext dbContext)
         {
             _db = dbContext;
         }
