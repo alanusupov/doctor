@@ -11,10 +11,30 @@ import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css';
 import 'moment/locale/ru'
 import {DateRange} from 'react-date-range'
+import { history } from '../../_helpers/history';
 import {VictoryChart, VictoryTheme, VictoryLine} from 'victory';
-
-
+import authHeader from '../../_helpers/auth-header'
+import { authenticationService } from '../../_services/authentication.service';
 function AdminMain({getReception, ...props}) {
+
+  function logout() {
+    authenticationService.logout();
+    history.push('/login');
+}
+useEffect(()=>{
+Axios.get(url + '/api/login/admin', {headers: { 'Authorization': `Bearer ${authenticationService.currentUserValue.token}` }})
+ .catch((error) => {
+    if (error.response) {
+      logout()
+      console.log(error.response.status);
+      
+      console.log('ur gay')
+    }
+  });
+}, [])
+
+
+
   const nameMapper = {
     ru: 'Russian',
    
@@ -51,11 +71,9 @@ function AdminMain({getReception, ...props}) {
     // console.log(obj);
 
     async function senddate(){
-       const res = await Axios.post(url + '/api/Reception/GetStatistics', 
-       {
-        "formDate": first,
-        "toDate": second
-      })
+      console.log(authenticationService.currentUserValue.token)
+       const res = await Axios.post(url + '/api/Reception/GetStatistics',{"fromDate": first,"toDate": second},
+       {headers: { 'Authorization': `Bearer ${authenticationService.currentUserValue.token}` }})
       console.log(res.data.result)
       setDatas(res.data.result.map(x => {
         return (
@@ -97,7 +115,7 @@ function AdminMain({getReception, ...props}) {
   
   
   useEffect(() => {
-    Axios.get(url + "/api/Reception/Get").then((res) => {
+    Axios.get(url + "/api/Reception/Get",{headers: { 'Authorization': `Bearer ${authenticationService.currentUserValue.token}` }}).then((res) => {
       const { data } = res;
      
       if (data) getReception(data);
@@ -117,7 +135,7 @@ function AdminMain({getReception, ...props}) {
 
   const [stats, setStats] = useState('');
   useEffect(() => {
-    Axios.get(url + "/api/Statistical").then((res) => {
+    Axios.get(url + "/api/Statistical", {headers: { 'Authorization': `Bearer ${authenticationService.currentUserValue.token}` }}).then((res) => {
       const { data } = res;
     
       let i;

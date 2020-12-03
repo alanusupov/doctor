@@ -97,17 +97,18 @@ function getDoc(e){
 })
 document.querySelector('.cat-show').style.display = 'none';
 document.querySelector('#block1').style.display = 'block';
+document.querySelector('.left-dis').style.height = '573px';
 if(window.innerWidth > '1111'){
   document.querySelector('.right-dis').style.display = 'block'
 
 }
 }
-function handleDoc(e){
+function handleDoc(name, id){
   
-  console.log('doc id:' + e.target.id);
-  let docName = document.querySelector('.fdoc-title').textContent;
-  setDname(docName)
-  setDocId(e.target.id)
+  //console.log('doc id:' + e.target.id);
+ // let docName = document.querySelector('.fdoc-title').textContent;
+  setDname(name)
+  setDocId(id)
   
   document.querySelector('.doc-show').style.display = 'none';
   document.querySelector('.cal-show').style.display = 'block';
@@ -115,6 +116,8 @@ function handleDoc(e){
   document.querySelector('.disp-2').style.display = 'none';
   document.querySelector('.disp-3').style.display = 'block';
   document.querySelector('.left-dis').style.left = '-258px';
+  document.querySelector('.left-dis').style.height = '646.5px';
+  
   
   //273
   document.querySelector('#block2').style.display = 'block';
@@ -132,6 +135,7 @@ function prev1(){
 
   document.querySelector('.disp-2').style.display = 'none';
  document.querySelector('.disp-1').style.display = 'block';
+ document.querySelector('.left-dis').style.height = '577px';
 }
 function prev2(){
   document.querySelector('.cal-show').style.display = 'none';
@@ -172,6 +176,8 @@ function handleCal(){
 
     document.querySelector('#block3').style.display = 'block';
     document.querySelector('#block4').style.display = 'block';
+
+    document.querySelector('.right-dis-line1').style.display = 'block';
 
 }
 function handleForm() {
@@ -287,11 +293,13 @@ async function sendData(){
             <div className='send-subitem'>УСЛУГА:</div>
             <div className='send-item1'>{spec}</div>
           </div>
+         
           <div style={{display: 'none'}} id="block2" className='send-block1'>
             <div className='send-subitem'>ВРАЧ:</div>
             <div className='send-item1'>{dname}</div>
           </div>  
-        </div>
+        </div> 
+        <hr className='right-dis-line'/>
         <div className='send-info22'>
           <div style={{display: 'none'}} id="block3" className='send-block1'>
             <div className='send-subitem'>ДАТА:</div>
@@ -302,9 +310,10 @@ async function sendData(){
             <div className='send-item1'>{day + ':00'}</div>
           </div>
         </div>
+        <hr className='right-dis-line1'/>
         <div className='send-info2'>
           <div style={{display: 'none'}} id="block5" className='send-block1'>
-            <div className='send-subitem'>ВАШЕ ИМЯ:</div>
+            <div className='send-subitem send-subitem4'>ВАШЕ ИМЯ:</div>
             <div className='send-item1'>{name}</div>
           </div>
           
@@ -348,7 +357,7 @@ async function sendData(){
         <ModalHeader toggle={toggle}>Выбор врача</ModalHeader>
         <div className='fdocs'>
              { docs ? docs.map(x => (
-                  <div name={x.fullName} id={x.employeeId} onClick={handleDoc}
+                  <div name={x.fullName} id={x.employeeId} onClick={() => handleDoc(x.fullName, x.employeeId)}
                    className='fdoc' key={x.employeeId}>
                     <div id={x.employeeId} className='fdoc-img-wrap'>
                       <img id={x.employeeId} className='fdoc-img' src={url + x.imgUrl}/>

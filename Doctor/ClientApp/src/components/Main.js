@@ -6,12 +6,14 @@ import Doctors from './Doctors';
 import Questions from './Questions';
 import Consult from './Consult';
 import PicDivider from './PicDivider';
+import { Redirect } from 'react-router-dom';
 
 function Main() {
   return (
     <div>
       <Top/>
       <How/>
+      
       <PicDivider/>
       <About/>
       <PicDivider/>

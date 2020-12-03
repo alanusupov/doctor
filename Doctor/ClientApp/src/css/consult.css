@@ -48,7 +48,7 @@
   }
   .consult{
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
   }
   .linebreak1{
     display: block;
