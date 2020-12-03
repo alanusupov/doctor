@@ -13,7 +13,7 @@ namespace Doctor.Service
     {
         public static string Approved = "Одобрено";
         public static string Canceled = "Отмененные";
-        public static string Pending = "В ожидании";
+        public static string Pending = "В Ожидании";
     }
     public class ReceptionService : IGenericService<Reception>
     {

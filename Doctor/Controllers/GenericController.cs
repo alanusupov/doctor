@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Doctor.Controllers
 {
+    [Authorize(Roles = "admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class GenericController<T> : Controller where T : class
@@ -21,6 +22,7 @@ namespace Doctor.Controllers
             _genericService = genericService;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<T>>> Get()
         {
@@ -29,7 +31,8 @@ namespace Doctor.Controllers
                 return NotFound();
             return Ok(result);
         }
-        
+
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<ActionResult<T>> Get(int id)
         {

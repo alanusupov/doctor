@@ -5,12 +5,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Doctor.Models;
 using Doctor.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Doctor.Controllers
 {
+    [Authorize(Roles = "admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class FileController : ControllerBase

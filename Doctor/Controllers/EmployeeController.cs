@@ -11,6 +11,7 @@ namespace Doctor.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+
     public class EmployeeController : GenericController<Employee>
     {
         public EmployeeController(IGenericService<Employee> genericService) : base(genericService)
