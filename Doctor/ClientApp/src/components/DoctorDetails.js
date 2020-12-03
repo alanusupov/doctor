@@ -6,6 +6,7 @@ import '../css/doc-detail.css'
 import '../../node_modules/react-rater/lib/react-rater.css'
 import Rater from 'react-rater'
 import box from '../media/boxf.png'
+import ConstModal from './ConstModal';
 
 function DoctorDetails() {
 
@@ -53,6 +54,7 @@ console.log(params);
      </p>
          </div>
          </div>
+         <ConstModal name="Записаться" style='top-btn' />
        </div>
         <hr className="dd-line"></hr>
         <div className='doc-detail2'>

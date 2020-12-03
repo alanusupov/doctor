@@ -19,23 +19,23 @@ function How() {
       <div className='how-info'>
          <h2 className="title how-title">Как получить консультацию?</h2>
       <div className="how-step">
-      Первый шаг
+      Выберите, что вас тревожит и подходящего врача
       </div>
       <img alt='arrow' className="how-arrow" src={arrow} />
       <div className="how-step">
-      Второй шаг
+      Выберите длительность консультации и стоимость
       </div>
       <img alt='arrow' className="how-arrow" src={arrow} />
       <div className="how-step">
-      Третий шаг
+      Введите ваши контактные данные
       </div>
       <img alt='arrow' className="how-arrow" src={arrow} />
       <div className="how-step">
-      Четвертый шаг
+      Выберите удобный канал связи
       </div>
       <img alt='arrow' className="how-arrow" src={arrow} />
       <div className="how-step">
-      Пятый шаг
+      Оплатите выбранную услугу и ожидайте звонка врача
       </div>
       <ConstModal name='Получить консультацию' style='main-btn'/>
       </div>

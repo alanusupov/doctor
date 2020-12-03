@@ -74,12 +74,12 @@ import moment from 'moment'
   let newdate = new Date(newdata.date) 
       console.log(newdate);
      
-      let newD = new Date(newdate.toDateString().toString() + ' ' + newdata.time + ':00' ) ;
+      let newD = new Date(newdate.toDateString().toString() + ' ' + newdata.time + ':00 GMT' ) ;
       console.log(newD.toJSON());
     
       const data1 = {
         "receptionId": newdata.id,
-        "dateOfReceipt": new Date(newdata.date).toJSON(),
+        "dateOfReceipt": newD.toJSON(),
         "status": newdata.status
         
 

@@ -14,10 +14,7 @@ function Questions() {
         <SlideDown  text='random text asdf dfaskdfjkds jfksd kdfs'/>
         <SlideDown  text='random text asdf dfaskdfjkds jfksd kdfs'/>
         <SlideDown  text='random text asdf dfaskdfjkds jfksd kdfs'/>
-        <SlideDown  text='random text asdf dfaskdfjkds jfksd kdfs'/>
-        <SlideDown  text='random text asdf dfaskdfjkds jfksd kdfs'/>
-        <SlideDown  text='random text asdf dfaskdfjkds jfksd kdfs'/>
-        <SlideDown  text='random text asdf dfaskdfjkds jfksd kdfs'/>
+       
         
       </div>
     </div>

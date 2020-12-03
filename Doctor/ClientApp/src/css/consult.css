@@ -31,6 +31,7 @@
   margin-bottom: 10px;
   padding: 10px 15px;
   text-align: center;
+  width: 100%;
   
 }
 .cons-texts{
@@ -47,7 +48,7 @@
   }
   .consult{
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
   }
   .linebreak1{
     display: block;
@@ -55,11 +56,13 @@
   .consult-item{
     margin: 15px;
     font-size: 14px;
+
   }
 }
 @media screen and (min-width: 1110px){
   .consult-item{
     margin: 15px;
     font-size: 22px;
+    width: 600px;
   }
 }

@@ -6,64 +6,97 @@ import { url } from '../../url/url';
 import Slider from "react-slick";
 import moment from 'moment'
 import 'slick-carousel/slick/slick.css'
-import DayPicker, { DateUtils } from 'react-day-picker';
 import 'react-day-picker/lib/style.css'
-import MomentLocaleUtils from 'react-day-picker/moment';
+import 'react-date-range/dist/styles.css'; // main css file
+import 'react-date-range/dist/theme/default.css';
 import 'moment/locale/ru'
+import {DateRange} from 'react-date-range'
+import { history } from '../../_helpers/history';
 import {VictoryChart, VictoryTheme, VictoryLine} from 'victory';
-
+import authHeader from '../../_helpers/auth-header'
+import { authenticationService } from '../../_services/authentication.service';
 function AdminMain({getReception, ...props}) {
-  const [days,setDays] = useState({
-    from: null,
-    to: null
-  })
-  const modifiers = { start: days.from, end: days.to };
-  const [locale, setLocale] = useState('ru')
-  const [datas,setDatas] = useState({});
-  const [rdata,setRdata] = useState('');
 
- function handleDayClick(day) {
-    const range = DateUtils.addDayToRange(day, days);
-    setDays(range);
-    console.log(range);
-    days.to ? handleData() : handleData();
-    
-  }
- useEffect(() => {
+  function logout() {
+    authenticationService.logout();
+    history.push('/login');
+}
+useEffect(()=>{
+Axios.get(url + '/api/login/admin', {headers: { 'Authorization': `Bearer ${authenticationService.currentUserValue.token}` }})
+ .catch((error) => {
+    if (error.response) {
+      logout()
+      console.log(error.response.status);
+      
+      console.log('ur gay')
+    }
+  });
+}, [])
+
+
+
+  const nameMapper = {
+    ru: 'Russian',
    
-    setDays(days)
-   console.log(days);
-  
-    
-  }, [days]);
+  }
  
-  function handleData(){
-    if(days.to){
-      let obj = {
-      "formDate":   moment(new Date(days.from)).format('YYYY-MM-DD'),
-      "toDate": moment(new Date(days.to)).format('YYYY-MM-DD')
-    }
-    console.log(obj);
-    Axios.post(url + '/api/Reception/GetStatistics', obj).then((res) => {
-      const {data} = res;
-      console.log(data);
-      setDatas(data)
-      console.log(datas);
-    })
 
-    setDatas(datas);
-    console.log(datas.result);
-    let newd = datas.result ? datas.result.map(x => {
-     return ({
-       x: moment(new Date(x.dateOfReceipt)).format('YYYY-MM-DD'),
-       y: (datas.result.filter(n => moment(new Date(x.dateOfReceipt)).format('YYYY-MM-DD') === moment(new Date(n.dateOfReceipt)).format('YYYY-MM-DD'))).length
-     })
-    })
-    :null
-    console.log(newd);
-    setRdata(newd)
+  const [locale, setLocale] = useState('ru')
+  const [datas,setDatas] = useState([]);
+  const [rdata,setRdata] = useState('');
+  const [first,setFirst] = useState('');
+  const [second,setSecond] = useState('');
+  const [state, setState] = useState([
+    {
+      startDate: new Date(),
+      endDate: null,
+      key: 'selection'
     }
+  ]);
+  console.log(state);
+  function setDay(item){
+   setState([item.selection])
+   console.log(item);
+    setFirst(moment(new Date(item.selection.startDate)).format('YYYY-MM-DD'))
+    setSecond(moment(new Date(item.selection.endDate)).format('YYYY-MM-DD'))
+    console.log(first);
+    console.log(second)
+  }
+  function handleData(){
+    //console.log(days);
+    //   let obj = {
+    //   "formDate": first,
+    //   "toDate": second
+    // }
+    // console.log(obj);
+
+    async function senddate(){
+      console.log(authenticationService.currentUserValue.token)
+       const res = await Axios.post(url + '/api/Reception/GetStatistics',{"fromDate": first,"toDate": second},
+       {headers: { 'Authorization': `Bearer ${authenticationService.currentUserValue.token}` }})
+      console.log(res.data.result)
+      setDatas(res.data.result.map(x => {
+        return (
+          {
+          x: moment(new Date(x.dateOfReceipt)).format('YYYY-MM-DD'),
+          y: (res.data.result.filter(n => moment(new Date(x.dateOfReceipt)).format('YYYY-MM-DD') === moment(new Date(n.dateOfReceipt)).format('YYYY-MM-DD'))).length 
+        })
+       }))
+    }
+    senddate()
+    console.log(datas)
+    // let newd = datas.result ? datas.result.map(x => {
+    //  return (
+    //    {
+    //    x: moment(new Date(x.dateOfReceipt)).format('YYYY-MM-DD'),
+    //    y: (datas.result.filter(n => moment(new Date(x.dateOfReceipt)).format('YYYY-MM-DD') === moment(new Date(n.dateOfReceipt)).format('YYYY-MM-DD'))).length 
+    //  })
+    // })
+    // :null
+    //console.log(newd);
+    //setRdata(newd)
     
+  
     //let newData = datas.result
     // .map(x => {
     //   return {
@@ -72,25 +105,29 @@ function AdminMain({getReception, ...props}) {
     // })
     
   }
+  const showArr = useEffect(() => {
+   
+    setDatas(datas)
+   console.log(datas);
   
-  useEffect(()=> {
-    handleData()
-  }, [])
+  
+  }, [datas]);
+  
   
   useEffect(() => {
-    Axios.get(url + "/api/Reception/Get").then((res) => {
+    Axios.get(url + "/api/Reception/Get",{headers: { 'Authorization': `Bearer ${authenticationService.currentUserValue.token}` }}).then((res) => {
       const { data } = res;
-      console.log(res);
+     
       if (data) getReception(data);
-      console.log(days);
+      //console.log(days);
     });
   }, [getReception]);
-  console.log(props);
+ 
   const [docs,setDocs] = useState('');
   useEffect(() => {
     Axios.get(url + "/api/Employee").then((res) => {
       const { data } = res;
-      console.log(res);
+     
       setDocs(data)
       
     });
@@ -98,9 +135,8 @@ function AdminMain({getReception, ...props}) {
 
   const [stats, setStats] = useState('');
   useEffect(() => {
-    Axios.get(url + "/api/Statistical").then((res) => {
+    Axios.get(url + "/api/Statistical", {headers: { 'Authorization': `Bearer ${authenticationService.currentUserValue.token}` }}).then((res) => {
       const { data } = res;
-      console.log(res);
     
       let i;
       let ndata = [];
@@ -139,32 +175,32 @@ console.log(stats);
   
   return (
     <div>
-      <div style={{width: '800px'}}>
+      <div className='atop-wrap'>
+       
         <div className="admin-stat-input">
-        <DayPicker
-          className="Selectable"
-          localeUtils={MomentLocaleUtils} locale={locale}
-          numberOfMonths={1}
-          selectedDays={[days.from, days]}
-          
-          modifiers={modifiers}
-          onDayClick={handleDayClick}
-        />
-        <button onClick={handleData}>Получить Статистику</button>
+        <DateRange
+         
+           editableDateInputs={true}
+           onChange={item => setDay(item)}
+           moveRangeOnFirstSelection={false}
+           ranges={state} />
+        <button style={{color: 'white'}} className="btn bg-primary" onClick={handleData}>Получить Статистику</button>
         </div>
-        <VictoryChart
-  theme={VictoryTheme.material}
->
-  <VictoryLine
-    style={{
-      data: { stroke: "#0185CF" },
-      parent: { border: "1px solid #ccc"}
-    }}
-    data={rdata ? rdata : []}
-  />
-</VictoryChart>
 
-      </div>
+        <VictoryChart
+        minDomain={{ y:0}}
+        theme={VictoryTheme.material}>
+        <VictoryLine
+          
+          style={{
+            data: { stroke: "#0185CF" },
+            parent: { border: "1px solid #ccc"}
+          }}
+          data={datas ? datas : []}
+        />
+      </VictoryChart>
+<div>
+
       <div className='doc-stats'>
         <h3 style={{color: "#333333", fontSize: '16px', margin: '6px 15px'}}>Лучшие врачи</h3>
         <div className='stat-wrap'>
@@ -185,6 +221,8 @@ console.log(stats);
             </div>
           )): "loading..."}
         </div>
+</div>
+      </div>
       </div>
 
 

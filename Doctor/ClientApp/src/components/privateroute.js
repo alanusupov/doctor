@@ -13,7 +13,7 @@ function PrivateRoute({ component: Component, roles, ...rest }) {
                 return <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
             }else {
                 console.log('LOGGED IN');
-                
+                console.log(localStorage.getItem('currentUser'))
                 return <Component {...props} />
               
             }

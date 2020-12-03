@@ -38,3 +38,25 @@
   text-align: center;
   font-weight: bold;
 }
+
+.searchList{
+  list-style: none;
+  position: absolute;
+  z-index: 1000;
+  background: #FFF;
+  border: 1px solid #BFBFBF;
+  padding: 0;
+  left: 29%;
+
+}
+ul.searchList li {
+  padding: 10px 68px;
+  border-top: 1px solid #BFBFBF;
+}
+ul.searchList li:hover {
+  background-color: #ECF0F1;
+}
+.searchListImage{
+  width: 100px;
+  height: 100px;
+}

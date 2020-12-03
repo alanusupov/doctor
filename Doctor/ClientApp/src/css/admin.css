@@ -108,6 +108,8 @@
   border-radius: 8px;
   border: black 1px solid;
   width: fit-content;
+  margin-top: 59px;
+  margin-right: 305px;
 }
 .stat-img{
   width: 50px;
@@ -123,7 +125,20 @@
   margin: 10px;
   border: 1px solid #40BAFF;
 }
-
+.admin-stat-input{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+}
+.atop-wrap{
+  display: flex;
+  justify-content: space-evenly;
+}
+.atop-wrap svg{
+  width: 450px !important;
+  margin-left: 50px;
+}
 
 .Selectable .DayPicker-Day--selected:not(.DayPicker-Day--start):not(.DayPicker-Day--end):not(.DayPicker-Day--outside) {
   background-color: #f0f8ff !important;

@@ -37,6 +37,12 @@ function App() {
            <Redirect exact from="/admin/clients" to="/admin" />
            <Redirect exact from="/admin/cal" to="/admin" />
            <PrivateRoute exact path='/admin/docs' component={AdminDocs} />
+
+           <Redirect from='/how' to="/main" />
+           <Redirect from='/doctors' to="/main" />
+           <Redirect from='/questions' to="/main" />
+           <Redirect from='/contact' to="/main" />
+
            {/* <PrivateRoute exact path='/admin/clients' component={AdminMain} />
            <PrivateRoute exact path='/admin/main' component={AdminClients} /> */}
 
