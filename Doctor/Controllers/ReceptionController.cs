@@ -20,6 +20,7 @@ namespace Doctor.Controllers
         {
             _receptionService = receptionService;
         }
+        [AllowAnonymous]
         [HttpGet("Employee/{id}/{dateTime}")]
         public async Task<ActionResult<Dictionary<string,string>>> GetDateOfReceptions(int id, string dateTime)
         {
@@ -45,7 +46,6 @@ namespace Doctor.Controllers
                 return BadRequest();
             return Ok(new {result, reservation = result.Count(), income = result.Count() * 300, hours = result.Count() });
         }
-        [Authorize(Roles = "admin")]
         [HttpPost("Post")]
         public async Task<ActionResult<ReceptionGet>> PostReceptions([FromBody] ReceptionPost reception)
         {
