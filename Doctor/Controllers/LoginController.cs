@@ -46,12 +46,12 @@ namespace Doctor.Controllers
         }
 
         [Authorize(Roles = "admin")]
-        [HttpPost("admin")]
-        public IActionResult Post([FromBody] string value)
+        [HttpGet("admin")]
+        public IActionResult Post()
         {
             try
             {
-                return Ok(value);
+                return Ok();
             }
             catch (Exception)
             {
